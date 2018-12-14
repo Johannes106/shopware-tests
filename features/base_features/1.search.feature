@@ -30,7 +30,7 @@ Feature: search
     Scenario: search with productnumber
         Given I am on the website
         When I am searching for a product by entering the productnumber in the searchfield
-        Then I should see my product on the results of my search
+        Then I should be on the detailsite of the related product
 
     @pulsiva
     @vega
