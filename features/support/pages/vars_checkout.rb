@@ -67,7 +67,7 @@ class Csspathes_Checkout
     @checkout_orderbutton_path = '.actions--bottom > div > button' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @checkout_panel_path = '.panel.has--border > div > .table--header' if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/it/)
     @checkout_panel_path = '.panel.has--border' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
-    @checkout_paymentInAdvance_radio_path = '#payment_mean3' if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/es/)
+    #@checkout_paymentInAdvance_radio_path = '#payment_mean3' if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/es/)
     @checkout_payment_delivery_standard_radio_path = ".dispatch--method > div > .radio.auto_submit" if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/de/)
     @checkout_checkout_buy_button_path = '.confirm--actions.table--actions.block > button' if "#{@env_shop}".match(/vega/) && "#{@env_country}".match(/[a-z]{2}/)
   end
