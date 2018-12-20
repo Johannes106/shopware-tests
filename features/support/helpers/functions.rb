@@ -304,13 +304,13 @@ module MyFunctions
     if ( ENV['SHOP']=='vega' && (ENV['COUNTRY']=='de') || (ENV['COUNTRY']=='it') )
       block_css('.dpe-shopwide')
     end
-    if (page.has_css?("#mnd-cookie-bar"))
-      puts "found popup"
-      block_css("mnd-cookie-bar")
-      puts "--> closed popup"
-    else
-      puts "In #{VARS_ENV.r_country} is no popup"
-    end
+    # if (page.has_css?("#mnd-cookie-bar"))
+    #   puts "found popup"
+    #   block_css("mnd-cookie-bar")
+    #   puts "--> closed popup"
+    # else
+    #   puts "In #{VARS_ENV.r_country} is no popup"
+    # end
     if args.size == 1
       #puts "find_secure_with_one_arg:#{args}"
       element = find_secure_with_one_arg(*args)
