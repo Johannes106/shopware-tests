@@ -285,11 +285,11 @@ class User
       when 'at' then ['Rechnung', 'Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal']
       when 'ch' then ['Rechnung', 'Nachnahme', 'Kreditkarte', 'Vorauskasse', 'Paypal']
       when 'it' then ['Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal']
-      when 'fr' then ['Kreditkarte', 'Vorkasse', 'Paypal']#'Nachnahme', 
+      when 'fr' then ['Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal']
       when 'no' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'se' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'nl' then ['Rechnung', 'Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal', 'iDeal']
-      when 'es' then ['Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal']
+      when 'es' then ['Kreditkarte', 'Vorkasse', 'Paypal']#'Nachnahme', 
     end
   end
 
