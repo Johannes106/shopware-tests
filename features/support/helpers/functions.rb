@@ -334,6 +334,7 @@ module MyFunctions
       # if element is not found
     rescue Capybara::ElementNotFound => e
       #wrong path or required data
+      if(page.has_css?(".has--error"))
         begin # identiy kind of error: check if element has class 'has--error'
           find(".has--error")
           puts "\033[35m>>> There is a errormessage\033[0m\n"
@@ -350,6 +351,7 @@ module MyFunctions
             puts "\033[31m    >>>>>> #{element[:class]}\033[0m\n"
           end
         end
+      end
       # search for similar path and rerun with new path given of function
       find_secure_counter < 2 ? retry : raise
     rescue Net::ReadTimeout => e
