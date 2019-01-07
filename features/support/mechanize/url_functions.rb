@@ -70,7 +70,7 @@ class UrlFunctions
   def check_if_element_is_part_of_navi(page)
     #puts page
     #puts page.inspect
-    p#uts page.class
+    #puts page.class
     #nav_elements = page.search('.navigation--list-wrapper').at('a')['href']
     #puts "p:#{nav_elements}"
     #page.each do |ele|
