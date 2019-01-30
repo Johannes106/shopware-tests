@@ -584,10 +584,14 @@ module MyFunctions
 
 
   def compare_urls(expect_url, url)
+    expect_url = expect_url.to_s
+    url = url.to_s
     if (expect_url.to_s == url.to_s)
       puts("#{expect_url}")
     else
-      exit("WRONG URL:##{url}")
+      puts "expect_url:#{expect_url}"
+      puts "url:#{url}"
+      abort("WRONG URL:##{url}")
       return "WRONG URL:##{url}"
     end
 
