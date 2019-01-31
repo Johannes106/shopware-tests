@@ -104,7 +104,7 @@ class User
       when 'no' then nil
       when 'se' then nil
       when 'nl' then '22065260'
-      when 'be' then nil
+      when 'be' then '22065260'
       when 'es' then 'B63679427'
       when 'en' then 'B63679427'
     end
