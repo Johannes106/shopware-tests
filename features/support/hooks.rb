@@ -47,13 +47,13 @@ if ENV['DRIVER'] == 'saucelabs'
     scenario_tag = scenario.source_tag_names.last
     env_vars = "Shopware tests: #{ENV['BROWSER']} #{ENV['SYSTEM']} #{ENV['SHOP']} #{ENV['COUNTRY']} #{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']}"
     jobname = "#{env_vars} - #{scenario_tag}"
-    # jobname = "#{scenario.feature.name} - #{scenario.name} - #{scenario_tag}"
-    # Create a job with details fetched from the API
-    job = SauceWhisk::Jobs.fetch sessionid
-    job_id = job.id      # Sauce job_id
+    @job = SauceWhisk::Jobs.fetch sessionid
+    job_id = @job.id      # Sauce job_id
+    video_url = @job.video_url
     job_status = scenario.passed? ? true : false
     SauceWhisk::Jobs.pass_job job_id
     SauceWhisk::Jobs.fail_job job_id
     SauceWhisk::Jobs.change_status job_id, job_status
+    puts "\n>video_url:\n#{video_url}"
   end
 end
