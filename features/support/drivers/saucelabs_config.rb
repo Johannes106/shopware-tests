@@ -81,8 +81,8 @@ if ENV['DRIVER'] == 'saucelabs'
     end
     Capybara.default_driver = :saucelabs_driver
     if (ENV['SYSTEM'] == 'int') || (ENV['BROWSER'] == 'iPhone') || (ENV['BROWSER'] == 'iPad')
-      puts "Timeout of capybara is set to 81"
-      Capybara.default_max_wait_time = 81
+      puts "Timeout of capybara is set to 31"
+      Capybara.default_max_wait_time = 31
     else
       Capybara.default_max_wait_time = 30
     end
