@@ -1,0 +1,160 @@
+[
+  {
+    "uri": "features/base_features/1.search.feature",
+    "id": "search",
+    "keyword": "Feature",
+    "name": "search",
+    "description": "    As a customer\n    I will be able to search for a specific product",
+    "line": 2,
+    "elements": [
+      {
+        "id": "search;search-with-sku",
+        "keyword": "Scenario",
+        "name": "search with sku",
+        "description": "",
+        "line": 57,
+        "type": "scenario",
+        "tags": [
+          {
+            "name": "@pulsiva_mobile",
+            "line": 48
+          },
+          {
+            "name": "@vega_mobile",
+            "line": 49
+          },
+          {
+            "name": "@hotelwaesche_mobile",
+            "line": 50
+          },
+          {
+            "name": "@hw_jobeline_mobile",
+            "line": 51
+          },
+          {
+            "name": "@v_jobeline_mobile",
+            "line": 52
+          },
+          {
+            "name": "@export_mobile",
+            "line": 53
+          },
+          {
+            "name": "@chefworks_mobile",
+            "line": 54
+          },
+          {
+            "name": "@search_mobile",
+            "line": 55
+          },
+          {
+            "name": "@search_sku_mobile",
+            "line": 56
+          }
+        ],
+        "before": [
+          {
+            "match": {
+              "location": "capybara-3.12.0/lib/capybara/cucumber.rb:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 32000
+            }
+          },
+          {
+            "match": {
+              "location": "capybara-3.12.0/lib/capybara/cucumber.rb:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43000
+            }
+          },
+          {
+            "output": [
+              "Test mobile. So i can not set any size of browser"
+            ],
+            "match": {
+              "location": "features/support/hooks.rb:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 62000
+            }
+          }
+        ],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "I am on the website",
+            "line": 58,
+            "output": [
+              "go to https://www.jobeline.com/de-de/",
+              "statuscode:200"
+            ],
+            "match": {
+              "location": "features/step_definitions/global.rb:1"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113493480000
+            }
+          },
+          {
+            "keyword": "When ",
+            "name": "I am searching for a product by entering the sku in the searchfield",
+            "line": 59,
+            "output": [
+              "- set sku = \"10041838\"",
+              "clicked button of search"
+            ],
+            "match": {
+              "location": "features/step_definitions/search.rb:2"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23338852000
+            }
+          },
+          {
+            "keyword": "Then ",
+            "name": "I should be on the detailsite of the related product",
+            "line": 60,
+            "match": {
+              "location": "features/step_definitions/search.rb:20"
+            },
+            "result": {
+              "status": "failed",
+              "error_message": "Unable to find css \".MainProductName\" (Capybara::ElementNotFound)\n./features/support/helpers/functions.rb:333:in `find_secure_with_one_arg'\n./features/support/helpers/functions.rb:316:in `find_secure'\n./features/step_definitions/search.rb:29:in `/^I should be on the detailsite of the related product$/'\nfeatures/base_features/1.search.feature:60:in `Then I should be on the detailsite of the related product'",
+              "duration": 325407728000
+            }
+          }
+        ],
+        "after": [
+          {
+            "output": [
+              "\n>video_url:\nhttps://assets.saucelabs.com/jobs/f868cfcbaadf489492c0108bba1d8da3/video.mp4"
+            ],
+            "match": {
+              "location": "features/support/hooks.rb:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9100577000
+            }
+          },
+          {
+            "match": {
+              "location": "capybara-3.12.0/lib/capybara/cucumber.rb:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

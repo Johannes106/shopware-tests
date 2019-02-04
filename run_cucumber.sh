@@ -27,6 +27,7 @@ export COUNTRY
 export SAUCE_USERNAME
 export SAUCE_ACCESS_KEY
 
+> output/output.json
 #variables for cucumber
 parameter_config="$DRIVER $BROWSER $SYSTEM $SHOP $COUNTRY"
 sauce_config="$SAUCE_USERNAME $SAUCE_ACCESS_KEY"
