@@ -44,6 +44,8 @@ module ShopwareFunctions
     #decide which url have to be set
     data_of = data_of.downcase
     case (data_of)
+      when 'articles'
+        url = "/api/articles"
       when 'customers'
         url = "/api/customers"
       when 'orders'
@@ -51,6 +53,7 @@ module ShopwareFunctions
     end
   end
 
+  #orders
   #update entity of id and set key to value
   def setValueToCancel(data_of, id, key)
     @statusNumber = -1
@@ -64,12 +67,53 @@ module ShopwareFunctions
     updateData(url_request, options)
   end
 
+  #articles
+  #activate of article
+  def setValueToActivateArticle(data_of, id)
+    @active = true
+    options = {
+      :digest_auth => @auth_digest ,
+      :body => { :active => @active }.to_json
+    }
+    #url_data = stringGetUrlPath(data_of)
+    url_put = getUrlOfArticleById(data_of, id)
+    #puts "url_request: #{url_request}"
+    updateData(url_put, options)
+  end
+  #deactivate status of article
+  def setValueToDeactivateArticle(data_of, id)
+    @active = false
+    options = {
+      :digest_auth => @auth_digest ,
+      :body => { :active => @active }.to_json
+    }
+    #url_data = stringGetUrlPath(data_of)
+    url_put = getUrlOfArticleById(data_of, id)
+    #puts "url_request: #{url_request}"
+    updateData(url_put, options)
+  end
+
   #get one customer with id
   def getData(data_of, id)
     url_data = stringGetUrlPath(data_of)
     url_request = "#{url_data}/#{id}"
     response_data = readData(url_request)
     return response_data
+  end
+
+  def getArticleById(data_of, id)
+    url_data = stringGetUrlPath(data_of)
+    filter = "?useNumberAsId=true"
+    url_request = "#{url_data}/#{id}#{filter}"
+    response_data = readData(url_request)
+    return response_data
+  end
+
+  def getUrlOfArticleById(data_of, id)
+    url_data = stringGetUrlPath(data_of)
+    filter = "?useNumberAsId=true"
+    url_request = "#{url_data}/#{id}#{filter}"
+    return url_request
   end
 
   #get one customer identified by its mailaddress
