@@ -31,6 +31,34 @@ class Settings
       @urlBackend = 'http://int.pulsiva.com/'
     end
 
+    if ENV['SYSTEM'] == "stage"
+      @urlHttp = case ENV['COUNTRY']
+      when (/de/) then    'http://stage.pulsiva.com/de-de/'
+      when (/at/) then    'http://stage.pulsiva.com/at-de/'
+      when (/ch/) then    'http://stage.pulsiva.com/ch-de/'
+      when (/ch-fr/) then 'http://stage.pulsiva.com/ch-fr/'
+      when (/it/) then    'http://stage.pulsiva.com/it-it/'
+      when (/fr/) then    'http://stage.pulsiva.com/fr-fr/'
+      when (/no/) then    'http://stage.pulsiva.com/no-no/'
+      when (/se/) then    'http://stage.pulsiva.com/se-se/'
+      when (/nl/) then    'http://stage.pulsiva.com/nl-nl/'
+      when (/es/) then    'http://stage.pulsiva.com/es-es/'
+      end
+      @urlHttps = case ENV['COUNTRY']#Important:write 's
+      when (/de/) then    'http://stage.pulsiva.com/de-de/'
+      when (/at/) then    'http://stage.pulsiva.com/at-de/'
+      when (/ch/) then    'http://stage.pulsiva.com/ch-de/'
+      when (/ch-fr/) then 'http://stage.pulsiva.com/ch-fr/'
+      when (/it/) then    'http://stage.pulsiva.com/it-it/'
+      when (/fr/) then    'http://stage.pulsiva.com/fr-fr/'
+      when (/no/) then    'http://stage.pulsiva.com/no-no/'
+      when (/se/) then    'http://stage.pulsiva.com/se-se/'
+      when (/nl/) then    'http://stage.pulsiva.com/nl-nl/'
+      when (/es/) then    'http://stage.pulsiva.com/es-es/'
+      end
+      @urlBackend = 'http://stage.pulsiva.com/'
+    end
+
     if ENV['SYSTEM'] == "live"
       @urlHttp = case ENV['COUNTRY']
         when (/de/) then 'http://www.pulsiva.com/de-de/'

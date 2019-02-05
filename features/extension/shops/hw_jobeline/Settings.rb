@@ -1,7 +1,7 @@
 #hw_jobeline
 class Settings
   attr_accessor :url_checkout_confirm, :url_add_comand, :urlHttp, :urlHttps, :urlBackend, :baby_steps
-  
+
   def initialize
     if ENV['SYSTEM'] == "int"
       @urlHttp = case ENV['COUNTRY']
@@ -18,7 +18,23 @@ class Settings
       end
       @urlBackend = 'http://int.jobeline.de/'
     end
-    
+
+    if ENV['SYSTEM'] == "stage"
+      @urlHttp = case ENV['COUNTRY']
+      when (/de/) then    'http://stage.jobeline.de/'
+      when (/at/) then    'http://stage.jobeline.at/'
+      when (/ch/) then    'http://stage.jobeline.ch/ch-de/'
+      when (/ch-fr/) then 'http://stage.jobeline.ch/ch-fr/'
+      end
+      @urlHttps = case ENV['COUNTRY']#Important:write 's
+      when (/de/) then    'http://stage.jobeline.de/'
+      when (/at/) then    'http://stage.jobeline.at/'
+      when (/ch/) then    'http://stage.jobeline.ch/ch-de/'
+      when (/ch-fr/) then 'http://stage.jobeline.ch/ch-fr/'
+      end
+      @urlBackend = 'http://stage.jobeline.de/'
+    end
+
     if ENV['SYSTEM'] == "live"
       @urlHttp = case ENV['COUNTRY']
         when (/de/) then 'http://www.jobeline.de/'

@@ -1,7 +1,7 @@
 #v_jobeline
 class Settings
   attr_accessor :url_checkout_confirm, :url_add_comand, :urlHttp, :urlHttps, :urlBackend, :baby_steps
-  
+
   def initialize
     if ENV['SYSTEM'] == "int"
       @urlHttp = case ENV['COUNTRY']
@@ -34,7 +34,39 @@ class Settings
       end
       @urlBackend = 'http://int.jobeline.com/'
     end
-    
+
+    if ENV['SYSTEM'] == "stage"
+      @urlHttp = case ENV['COUNTRY']
+      when (/de/) then    'http://stage.jobeline.com/de-de/'
+      when (/at/) then    'http://stage.jobeline.com/at-de/'
+      when (/ch/) then    'http://stage.jobeline.com/ch-de/'
+      when (/ch-fr/) then 'http://stage.jobeline.com/ch-fr/'
+      when (/it/) then    'http://stage.jobeline.com/it-it/'
+      when (/fr/) then    'http://stage.jobeline.com/fr-fr/'
+      when (/no/) then    'http://stage.jobeline.com/no-no/'
+      when (/se/) then    'http://stage.jobeline.com/se-se/'
+      when (/nl/) then    'http://stage.jobeline.com/nl-nl/'
+      when (/be/) then    'http://stage.jobeline.com/be-fr/'
+      when (/es/) then    'http://stage.jobeline.com/es-es/'
+      when (/en/) then    'http://stage.jobeline.com/en-us/'
+      end
+      @urlHttps = case ENV['COUNTRY']#Important:write 's
+      when (/de/) then    'http://stage.jobeline.com/de-de/'
+      when (/at/) then    'http://stage.jobeline.com/at-de/'
+      when (/ch/) then    'http://stage.jobeline.com/ch-de/'
+      when (/ch-fr/) then 'http://stage.jobeline.com/ch-fr/'
+      when (/it/) then    'http://stage.jobeline.com/it-it/'
+      when (/fr/) then    'http://stage.jobeline.com/fr-fr/'
+      when (/no/) then    'http://stage.jobeline.com/no-no/'
+      when (/se/) then    'http://stage.jobeline.com/se-se/'
+      when (/nl/) then    'http://stage.jobeline.com/nl-nl/'
+      when (/be/) then    'http://stage.jobeline.com/be-fr/'
+      when (/es/) then    'http://stage.jobeline.com/es-es/'
+      when (/en/) then    'http://stage.jobeline.com/en-us/'
+      end
+      @urlBackend = 'http://stage.jobeline.com/'
+    end
+
     if ENV['SYSTEM'] == "live"
       @urlHttp = case ENV['COUNTRY']
         when (/de/) then 'http://www.jobeline.com/de-de/'
