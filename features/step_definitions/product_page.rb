@@ -80,9 +80,9 @@ Then(/^I should see all necessary elememts for getting more informations about t
   # define path of product_information
   product_page_productinfo_path = productpage[:pathes].product_page_productinfo_path
   # define path of product_recommodations
-  product_page_productrecommodations_path = productpage[:pathes].product_page_productrecommodations_path
-  # define path of product_information
-  # product_page_productlast_path = productpage[:pathes].product_page_productlast_path #new pdp: if nothing is in my history then the class is not visible
+  #product_page_productrecommodations_path = productpage[:pathes].product_page_productrecommodations_path
+  # define path of last seen products
+  #product_page_productlast_path = productpage[:pathes].product_page_productlast_path
 
   # expect name_path include name
   productname_element = find_secure(product_page_productname_path)
@@ -100,8 +100,8 @@ Then(/^I should see all necessary elememts for getting more informations about t
   expect(page).to have_css(product_page_productinfo_path),
       "Expect to find the css-element (#{product_page_productinfo_path}) but the page with the url #{current_url} has no such element"
   # expect page has css of productrecommodations
-  expect(page).to have_css(product_page_productrecommodations_path),
-      "Expect to find the css-element (#{product_page_productrecommodations_path}) but the page with the url #{current_url} has no such element"
+  #expect(page).to have_css(product_page_productrecommodations_path),
+  #    "Expect to find the css-element (#{product_page_productrecommodations_path}) but the page with the url #{current_url} has no such element"
   # expect page has css of product_configuration
   #expect(page).to have_css(product_page_productlast_path),
   #    "Expect to find the css-element (#{product_page_productlast_path}) but the page with the url #{current_url} has no such element"

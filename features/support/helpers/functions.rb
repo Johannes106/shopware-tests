@@ -142,7 +142,7 @@ module MyFunctions
   end
 
   def modify_url(url, htaccess)
-    if (ENV['SYSTEM'] == 'int')
+    if (ENV['SYSTEM'] == 'int') || (ENV['SYSTEM'] == 'stage')
       new_url = url.gsub("//", "//#{htaccess}")
       puts "set htaccess"
       return new_url
