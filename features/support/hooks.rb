@@ -37,6 +37,19 @@ After ('@prestep') do |s|
   Cucumber.wants_to_quit = true if s.failed?
 end
 
+#quick and dirty: create a method Here
+    def add_browser_logs
+      time_now = Time.now
+      # Getting current URL
+      current_url = Capybara.current_url.to_s
+      # Gather browser logs
+      logs = page.driver.browser.manage.logs.get(:browser).map {|line| [line.level, line.message]}
+      # Remove warnings and info messages
+      logs.reject! { |line| ['WARNING', 'INFO'].include?(line.first) }
+      logs.any? == true
+      embed(time_now.strftime('%Y-%m-%d-%H-%M-%S' + "\n") + ( "Current URL: " + current_url + "\n") + logs.join("\n"), 'text/plain', 'BROWSER ERROR')
+    end
+
 #with this around there will be a video for each scenario but this takes too much time
 if ENV['DRIVER'] == 'saucelabs'
   After do |scenario|
@@ -55,5 +68,6 @@ if ENV['DRIVER'] == 'saucelabs'
     SauceWhisk::Jobs.fail_job job_id
     SauceWhisk::Jobs.change_status job_id, job_status
     puts "\n>video_url:\n#{video_url}"
+    add_browser_logs
   end
 end
