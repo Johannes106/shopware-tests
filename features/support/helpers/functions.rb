@@ -257,15 +257,20 @@ module MyFunctions
       puts ">#{path}< is a Regex, so skip this"
     else
       if ( path_searchterm.include?("#") || path_searchterm.include?(".") )
+        #is searchterm a class or id-path?
         path_searchterm_identifier = path_searchterm.scan(/[#|.]/)
+        #seperate searchterm by .# ord 0-9
         path_searchterm_without_number_and_identifier = path_searchterm.gsub(/[#|.]*[0-9]*/, "")
         content = html
-        searchterm_in_content = content.scan(/#{path_searchterm_without_number_and_identifier}[0-9]*/)
-        searchterm_in_content.uniq!
-        path_output = "#{path_searchterm_identifier}#{searchterm_in_content}"
-        output_string = path_output.to_s.gsub(/\"/, '\'').gsub(/[\[\]]/, '').gsub(/'/, "")
-      else
-        output_string = path
+        #is searchterm in content included
+        if content.include?(path_searchterm_without_number_and_identifier)
+          searchterm_in_content = content.scan(/#{path_searchterm_without_number_and_identifier}[0-9]*/)
+          searchterm_in_content.uniq!
+          path_output = "#{path_searchterm_identifier}#{searchterm_in_content}"
+          output_string = path_output.to_s.gsub(/\"/, '\'').gsub(/[\[\]]/, '').gsub(/'/, "")
+        else
+          output_string = path
+        end
       end
     end
     puts "OUTPUT:#{output_string}"
@@ -490,7 +495,6 @@ module MyFunctions
       puts "\033[35m#{e.inspect}\033[0m\n"
       sleep 1
       puts "visit #{url} again"
-      visit(url)
       Capybara.default_max_wait_time = 20
       visit_secure_counter <= 3 ? retry : raise
     rescue Exception => e
