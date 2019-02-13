@@ -32,7 +32,7 @@ class Settings
         when (/es/) then    'http://int.jobeline.com/es-es/'
         when (/en/) then    'http://int.jobeline.com/en-us/'
       end
-      @urlBackend = 'http://int.jobeline.com/'
+      @urlBackend = 'https://int.jobeline.com/'
     end
 
     if ENV['SYSTEM'] == "stage"
@@ -64,7 +64,7 @@ class Settings
         when (/es/) then    'https://stage.jobeline.com/es-es/'
         when (/en/) then    'https://stage.jobeline.com/en-us/'
       end
-      @urlBackend = 'http://stage.jobeline.com/'
+      @urlBackend = 'https://stage.jobeline.com/'
     end
 
     if ENV['SYSTEM'] == "live"

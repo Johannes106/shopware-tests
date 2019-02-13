@@ -16,7 +16,7 @@ class Settings
         when (/ch/) then    'https://int.erwinmueller.ch/ch-de/'
         when (/ch-fr/) then 'https://int.erwinmueller.ch/ch-fr/'
       end
-      @urlBackend = 'http://int.hotelwaesche.de'
+      @urlBackend = 'https://int.hotelwaesche.de'
     end
 
     if ENV['SYSTEM'] == "stage"
@@ -32,7 +32,7 @@ class Settings
         when (/ch/) then    'https://stage.erwinmueller.ch/ch-de/'
         when (/ch-fr/) then 'https://stage.erwinmueller.ch/ch-fr/'
       end
-      @urlBackend = 'http://stage.hotelwaesche.de'
+      @urlBackend = 'https://stage.hotelwaesche.de'
     end
 
     if ENV['SYSTEM'] == "live"

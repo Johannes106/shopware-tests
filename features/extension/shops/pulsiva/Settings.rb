@@ -28,7 +28,7 @@ class Settings
         when (/nl/) then    'https://int.pulsiva.com/nl-nl/'
         when (/es/) then    'https://int.pulsiva.com/es-es/'
       end
-      @urlBackend = 'http://int.pulsiva.com/'
+      @urlBackend = 'https://int.pulsiva.com/'
     end
 
     if ENV['SYSTEM'] == "stage"
@@ -56,7 +56,7 @@ class Settings
       when (/nl/) then    'https://stage.pulsiva.com/nl-nl/'
       when (/es/) then    'https://stage.pulsiva.com/es-es/'
       end
-      @urlBackend = 'http://stage.pulsiva.com/'
+      @urlBackend = 'https://stage.pulsiva.com/'
     end
 
     if ENV['SYSTEM'] == "live"
