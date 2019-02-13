@@ -32,7 +32,7 @@ class Settings
         when (/es/) then    'https://int.vega-direct.com/es-es/'
         when (/en/) then    'https://int.vega-direct.com/en-us/'
       end
-      @urlBackend = 'http://int.vega-direct.com/'
+      @urlBackend = 'https://int.vega-direct.com/'
     end
 
     if ENV['SYSTEM'] == "stage"
@@ -64,7 +64,7 @@ class Settings
       when (/es/) then    'https://stage.vega-direct.com/es-es/'
       when (/en/) then    'https://stage.vega-direct.com/en-us/'
       end
-      @urlBackend = 'http://stage.vega-direct.com/'
+      @urlBackend = 'https://stage.vega-direct.com/'
     end
 
     if ENV['SYSTEM'] == "live"
