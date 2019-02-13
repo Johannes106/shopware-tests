@@ -68,6 +68,8 @@ if ENV['DRIVER'] == 'saucelabs'
     SauceWhisk::Jobs.fail_job job_id
     SauceWhisk::Jobs.change_status job_id, job_status
     puts "\n>video_url:\n#{video_url}"
-    add_browser_logs
+    if ENV['BROWSER'] != 'iPhone'
+      add_browser_logs
+    end
   end
 end
