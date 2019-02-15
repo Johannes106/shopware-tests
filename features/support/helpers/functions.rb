@@ -53,8 +53,12 @@ module MyFunctions
 
   #select value by text on dropdown-menu
   def form_set_dropdown(var_text, option_value, dropdown_path)
-    puts "- set #{var_text}: #{option_value}"
-    page.find("#{dropdown_path} option", :text => option_value).click
+    if(option_value)
+      puts "- set #{var_text}: #{option_value}"
+      page.find("#{dropdown_path} option", :text => option_value).click
+    else
+      puts "> variable for dropdown is not defined"
+    end
   end
 
   #check if a variable exists and set its value
