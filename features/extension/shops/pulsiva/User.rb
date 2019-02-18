@@ -1,7 +1,7 @@
 #pulsiva
 class User
   attr_accessor :eMail, :eMail_sec ,:password, :password_sec, :company, :company_kind, :firstname, :lastname, :department, :prefix, :prefix_sec, :street, :streetnumber,
-                :postcode, :city, :telephone, :customer_number, :taxid, :taxvat, :organumber, :country, :owner_firstname, :owner_lastname, :language_change_to, :country_contraction_language_change_to, :payment_methods
+                :postcode, :city, :telephone, :customer_number, :taxid, :taxvat, :organumber, :country, :country_area, :owner_firstname, :owner_lastname, :language_change_to, :country_contraction_language_change_to, :payment_methods
 
   def initialize
     @customer_number = case ENV['COUNTRY']
@@ -125,6 +125,19 @@ class User
       when 'nl' then 'Nederland'
       when 'be' then 'Belgique'
       when 'es' then nil
+    end
+    @country_area = case ENV['COUNTRY']
+      when 'de' then nil
+      when 'at' then nil
+      when 'ch' then nil
+      when 'it' then nil
+      when 'fr' then nil
+      when 'no' then nil
+      when 'se' then nil
+      when 'nl' then nil
+      when 'be' then nil
+      when 'es' then nil
+      when 'en' then nil
     end
     @owner_firstname = case ENV['COUNTRY']
       when 'de' then nil
@@ -289,7 +302,7 @@ class User
       when 'no' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'se' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'nl' then ['Rechnung', 'Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal', 'iDeal']
-      when 'es' then ['Kreditkarte', 'Vorkasse', 'Paypal']#'Nachnahme', 
+      when 'es' then ['Kreditkarte', 'Vorkasse', 'Paypal']#'Nachnahme',
     end
   end
 

@@ -1,7 +1,7 @@
 #hotelwaesche
 class User
   attr_accessor :customer_number, :eMail, :eMail_sec ,:password, :password_sec, :company, :company_kind, :firstname, :lastname, :department, :prefix, :prefix_sec, :street, :streetnumber,
-                :postcode, :city, :telephone, :taxid, :taxvat, :organumber, :country, :owner_firstname, :owner_lastname, :language_change_to, :country_contraction_language_change_to, :payment_methods
+                :postcode, :city, :telephone, :taxid, :taxvat, :organumber, :country, :country_area, :owner_firstname, :owner_lastname, :language_change_to, :country_contraction_language_change_to, :payment_methods
 
   def initialize
     @customer_number = case ENV['COUNTRY'] #kundennummer
@@ -58,6 +58,11 @@ class User
       when 'de' then 'Deutschland'
       when 'at' then 'Österreich'
       when 'ch' then 'Schweiz'
+    end
+    @country_area = case ENV['COUNTRY']
+      when 'de' then nil
+      when 'at' then nil
+      when 'ch' then nil
     end
     @owner_firstname = case ENV['COUNTRY']
       when 'de' then nil
