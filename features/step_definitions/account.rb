@@ -105,6 +105,7 @@ When(/^I create a new account with my data$/) do
   postcode = account[:data].postcode
   city = account[:data].city
   country = account[:data].country
+  country_area = account[:data].country_area
 
   #path
   account_registerform_path = account[:pathes].account_registerform_path
@@ -125,6 +126,7 @@ When(/^I create a new account with my data$/) do
   account_registerform_postcode_path = account[:pathes].account_registerform_postcode_path
   account_registerform_city_path = account[:pathes].account_registerform_city_path
   account_registerform_country_path = account[:pathes].account_registerform_country_path
+  account_registerform_countryarea_path = account[:pathes].account_registerform_countryarea_path
   account_registerform_button_path = account[:pathes].account_registerform_button_path
   navigation_hover_breadcrumb_path = account[:pathes].navigation_hover_breadcrumb_path
 
@@ -187,9 +189,9 @@ When(/^I create a new account with my data$/) do
   #set value for city
   form_set_value(registerform, "city", city, account_registerform_city_path)
   #set value for country
-  #element = find_secure(account_registerform_country_path)
-  #element.select(country)
   form_set_dropdown("country", country, account_registerform_country_path)
+  #set value for country_area 
+  form_set_dropdown("country_area", country_area, account_registerform_countryarea_path)
 
   #click button
   find_secure(account_registerform_button_path).click
@@ -471,7 +473,7 @@ When(/^I modify my address for my bill$/) do
   #css pathes
   account_accountinfo_billaddress_box_path = account[:pathes].account_accountinfo_billaddress_box_path
   account_accountinfo_billaddresschange_button_appear_path = account[:pathes].account_accountinfo_billaddresschange_button_appear_path
-  
+
   find_secure(account_accountinfo_billaddress_box_path)
   account_accountinfo_billaddresschange_box = find_secure(account_accountinfo_billaddress_box_path)
   find_secure_counter ||= 0
@@ -491,7 +493,7 @@ When(/^I modify my address for my bill$/) do
 
   close_popup("#close-dpe-shopwide", 3)
   element.click
-  
+
   puts "I change prefix of my address for invoice"
   step("I change prefix of my address for invoice")
 end
@@ -501,7 +503,7 @@ When(/^I change prefix of my address for invoice$/) do
 
   account_invoiceadresschange_form_prefix_path = account[:pathes].account_invoiceadresschange_form_prefix_path
   account_invoiceadresschange_button_path = account[:pathes].account_invoiceadresschange_button_path
-  
+
   if (VARS_ENV.r_country == 'no') || (VARS_ENV.r_country == 'se')
     puts "in #{VARS_ENV.r_country} there is no prefix"
   else
