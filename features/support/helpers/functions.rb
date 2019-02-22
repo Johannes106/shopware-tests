@@ -506,13 +506,7 @@ module MyFunctions
     rescue Exception => e
       puts "\033[35m#{e.inspect}\033[0m\n"
     end
-    sc = url_functions.get_status_code(url)
-    if sc != 200
-      puts "i can not visit #{url}"
-      exit
-    else
-      puts "statuscode:#{sc}"
-    end
+    get_status_of_website(url)
   end
 
   # click: catch Errors
@@ -536,6 +530,10 @@ module MyFunctions
       puts "\033[35m#{e.inspect}\033[0m\n"
     end
 
+    get_status_of_website(url)
+  end
+
+  def get_status_of_website(url)
     sc = url_functions.get_status_code(url)
     if sc != 200
       puts "i can not visit #{url}"
