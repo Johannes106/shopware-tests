@@ -426,6 +426,7 @@ When(/^I set payment$/) do
   else
     puts "----> there are no options to choose for payment"
   end
+  sleep 2
   expect(page).not_to have_selector(".js--loading-indicator", visible: true)
   #expect(find_secure(:css, checkout_paymentInAdvance_radio_path)).to be_checked
   puts "> payment is chosen"
