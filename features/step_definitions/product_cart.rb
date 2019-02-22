@@ -10,7 +10,7 @@ Given(/^I am on the product cart page$/) do
 end
 
 Given(/^I have added a product to the cart$/) do
-  step("I add an article to my cart by ajax")  
+  step("I add an article to my cart by ajax")
 end
 
 Given(/^the product cart contains an article$/) do
@@ -22,13 +22,13 @@ Given(/^the product cart contains an article$/) do
     url = "#{website_url}#{url_part_product_cart}"
   end
   homepage_content_logo_path = productcart[:pathes].homepage_content_logo_path
-  
+
   visit_secure(url)
-  
+
   # with ajax'
   product_cart_article_path = productcart[:pathes].product_cart_article_path
   find_secure(product_cart_article_path)
-  
+
   #check if cart contains an article
   find_secure(homepage_content_logo_path)
   expect(page).to have_css(product_cart_article_path),
@@ -38,7 +38,7 @@ end
 And(/^I add an article to my cart manually$/) do
   puts "I am on the product page of an article"
   step("I am on the product page of an article")
-  block_css('.navigation-main')  
+  block_css('.navigation-main')
   puts "I add an article to the product cart by clicking the button to push it into the cart"
   step("I add an article to the product cart by clicking the button to push it into the cart")
   puts "I am on the product cart page"
@@ -49,7 +49,7 @@ And(/^I add an article to my cart by ajax$/) do
   website_url = settings.urlHttps
   sku = productcart[:data].sku
   amount = productcart[:data].amount
-  #assembling url:
+  #assembling url:  
   ajax_params_function = "checkout/ajaxAddArticleCart?callback=jQuery"
   ajax_params_sku = "&sAdd=#{sku}"
   ajax_params_amount = "&sQuantity=#{amount}"
@@ -60,7 +60,7 @@ end
 When(/^I click on the button to continue shopping$/) do
   start_url = current_url
   product_cart_button_continue_path = productcart[:pathes].product_cart_button_continue_path
-  
+
   element = find_secure(product_cart_button_continue_path, match: :first)
   element.click
   puts "--> clicked button for continue"
@@ -78,7 +78,7 @@ end
 
 When(/^I remove this article from the product cart$/) do
   product_cart_remove_article_path = productcart[:pathes].product_cart_remove_article_path
-  
+
   find_secure(product_cart_remove_article_path)
   element = find_secure(product_cart_remove_article_path)
   element.click
@@ -97,7 +97,7 @@ Then(/^I should see all necessary informations about this article within the pro
   product_cart_article_details_path = productcart[:pathes].product_cart_article_details_path
   product_cart_article_price_path = productcart[:pathes].product_cart_article_price_path
   product_cart_article_voucher_path = productcart[:pathes].product_cart_article_voucher_path
-  
+
   expect(page).to have_css(product_cart_article_details_path),
      "expected to see here details to the article in my cart in the css (#{product_cart_article_details_path}), but it does not appear!"
   puts "found product details"
@@ -111,7 +111,7 @@ end
 
 When(/^I navigate to the checkout by clicking the button which navigates to the checkout$/) do
   product_cart_button_checkout_path = productcart[:pathes].product_cart_button_checkout_path#there are 2 buttons
-  
+
   #check for first button
   element = find_secure(product_cart_button_checkout_path, match: :first)
   element.click
@@ -121,7 +121,7 @@ end
 Then(/^I should be on the checkout\-page$/) do
   url_checkout_confirm = 'checkout'
   product_cart_checkout_steps_path = productcart[:pathes].product_cart_checkout_steps_path
-  
+
   expect(page).to have_css(product_cart_checkout_steps_path),
      "expected to find here the icons of each step for checkout (#{product_cart_checkout_steps_path}), but they do not appear!"
   expect(current_url).to include(url_checkout_confirm),
@@ -131,7 +131,7 @@ end
 When(/^I activate the function for voucher$/) do
   if (ENV['SHOP'] == 'chefworks')
     product_cart_voucher_checkbox_path = productcart[:pathes].product_cart_voucher_checkbox_path
-    
+
     find_secure(product_cart_voucher_checkbox_path)
     element = find_secure(product_cart_voucher_checkbox_path)
     element.click
@@ -146,7 +146,7 @@ When(/^I enter some code into the optional field$/) do
     code_voucher = '266233'
     product_cart_voucher_input_path = productcart[:pathes].product_cart_voucher_input_path
     product_cart_voucher_button_path = productcart[:pathes].product_cart_voucher_button_path
-    
+
     element = find_secure(product_cart_voucher_input_path)
     element.set(code_voucher)
     puts "entered #{code_voucher}"
@@ -161,7 +161,7 @@ end
 Then(/^there should be the voucher-action in the url$/) do
   if (ENV['SHOP'] == 'chefworks')
     url_voucher = 'addVoucher/sTargetAction'
-    
+
     expect(current_url).to include(url_voucher),
        "expected that the current url (current_url includes #{url_voucher}, but it isn't so"
   else
@@ -174,7 +174,7 @@ When(/^I enter a sku into the integrated field on the cart$/) do
     sku = productcart[:data].sku
     product_cart_order_sku_path = productcart[:pathes].product_cart_order_sku_path
     product_cart_order_button_path = productcart[:pathes].product_cart_order_button_path
-    
+
     find_secure(product_cart_order_sku_path)
     element = find_secure(product_cart_order_sku_path)
     element.set(sku)
@@ -188,7 +188,7 @@ end
 Then(/^I will see the add-action in the url$/) do
   if (ENV['SHOP'] == 'chefworks')
     url_add_comand = settings.url_add_comand
-    
+
     expect(current_url).to include(url_add_comand),
        "expected that the current_url contains #{url_add_comand} but it is only #{current_url}"
   else
