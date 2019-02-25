@@ -302,7 +302,7 @@ class User
       when 'no' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'se' then ['Nachnahme', 'Kreditkarte', 'Vorkasse']
       when 'nl' then ['Rechnung', 'Nachnahme', 'Kreditkarte', 'Vorkasse', 'Paypal', 'iDeal']
-      when 'es' then ['Kreditkarte', 'Vorkasse', 'Paypal']#'Nachnahme',
+      when 'es' then ['Kreditkarte', 'Vorkasse', 'Nachnahme', 'Paypal']
     end
   end
 
