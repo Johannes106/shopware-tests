@@ -45,7 +45,7 @@ Given(/^I already created an user account$/) do
   customer_id_determined = shopware.getCustomerIdByMail(eMail)
   puts "customer_id_determined: #{customer_id_determined}"
   if customer_id_determined.is_a?(String)
-    puts "-> no unique account with customer:#{eMail} exists"
+    puts "-> register an user by api"
     step('I register an user by api')
     # puts "I am on the registration page"
     # step("I am on the registration page")
@@ -190,7 +190,7 @@ When(/^I create a new account with my data$/) do
   form_set_value(registerform, "city", city, account_registerform_city_path)
   #set value for country
   form_set_dropdown("country", country, account_registerform_country_path)
-  #set value for country_area 
+  #set value for country_area
   form_set_dropdown("country_area", country_area, account_registerform_countryarea_path)
 
   #click button
