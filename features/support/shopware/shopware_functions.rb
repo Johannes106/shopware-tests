@@ -56,15 +56,21 @@ module ShopwareFunctions
   #orders
   #update entity of id and set key to value
   def setValueToCancel(data_of, id, key)
-    @statusNumber = -1
-    options = {
-      :digest_auth => @auth_digest ,
-      :body => { :orderStatusId => @statusNumber }.to_json
-    }
-    url_data = stringGetUrlPath(data_of)
-    url_request = "#{url_data}/#{id}"
-    #puts "url_request: #{url_request}"
-    updateData(url_request, options)
+    if(key.is_a?(String))
+      key = key.to_sym
+      puts "key:#{key}"
+      @statusNumber = -1
+      options = {
+        :digest_auth => @auth_digest ,
+        :body => { :orderStatusId => @statusNumber }.to_json
+      }
+      url_data = stringGetUrlPath(data_of)
+      url_request = "#{url_data}/#{id}"
+      #puts "url_request: #{url_request}"
+      updateData(url_request, options)
+    else
+      abort "The given key >#{key}< is not valid"
+    end
   end
 
   #articles
@@ -138,29 +144,36 @@ module ShopwareFunctions
   #get orderid of order
   #usage: set status of order
   def getAndCancelOrderIdByCustomerId(id)
+    unit = "Orders"
     key = "id"
     #value = mailaddress
     url_data = "/api/orders"
     filter = "?filter[customerId]=#{id}"
     url_request = "#{url_data}/#{filter}"
+    puts "url_request:#{url_request}"
     response_data_customer = readData(url_request)
+    puts "response_data_customer:#{response_data_customer}"
     #puts "response_data_customer:#{response_data_customer}"
     amount_total_orders = response_data_customer['total']
+    puts "amount_total_orders:#{amount_total_orders}"
     counter=0
+    #while loop: set status for all known orders from user -> this is not required
     while counter < amount_total_orders do
-      customer_id_by_mail = response_data_customer['data'][counter][key]
-      puts ">>>>>> cancel order with id:#{customer_id_by_mail}"
-      setValueToCancel("Orders", customer_id_by_mail, "orderStatusId")
+      order_id_by_mail = response_data_customer['data'][counter][key]
+      order_number_by_mail = response_data_customer['data'][counter]['number']
+      puts ">>>>>> cancel order with id:#{order_id_by_mail} and order_number: #{order_number_by_mail}"
+      setValueToCancel(unit, order_id_by_mail, "orderStatusId")
+      #deleteing orders is not possible because missing api-comand
       counter += 1
     end
-    return customer_id_by_mail
+    return order_id_by_mail
   end
 
   #delete customer by id
   def deleteDataId(data_of, id)
     url_data =  stringGetUrlPath(data_of)
     url_request = "#{url_data}/#{id}"
-    puts ">>>>>> delete customer with id:#{id}"
+    puts ">>>>>> delete #{data_of} with id:#{id}"
     deleteData(url_request)
   end
 
@@ -185,11 +198,21 @@ module ShopwareFunctions
     # looking for id of user which belongs to mailaddress
     #1. get customer_id by key
     customer_id = getCustomerIdByMail(mail)
-    if customer_id.is_a?(Fixnum)
+    if customer_id.is_a?(Integer)
       #2. search order by mail
       #puts "updateOrderStatusForMail customer_id:#{customer_id}"
       getAndCancelOrderIdByCustomerId(customer_id)
-      #set orderStatus_Id to -1 (Stoniert / Abgelehnt)
+      #meaning of status of order:
+      #0 offen
+      #1 in Bearbeitung
+      #2 komplett abgeschlossen
+      #3 teilweise abgeschlossen
+      #4 Storniert / Abgelehnt
+      #5 Zur Lieferung bereit
+      #6 teilweise ausgeliefert
+      #7 komplett ausgeliefert
+      #8 Klärung notwendig
+      #-1 user defined: entferne den Artikel aus dem Backend - dieser existiert jedoch noch in der DB
       #to avoid an export of this data i have to set "orderStatusId" of the order to -1
     else
       puts ">>>>>> No User with #{mail} exists"
