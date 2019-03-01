@@ -28,7 +28,7 @@ class Csspathes_Websitebasics
     #navigation
     @navigation_menu_path = '.navigation--list-wrapper > ul > li:first-child > a'#'.navigation-main'
     @navigation_menu_title_path = '.advanced-menu > div.menu--container.menu--is-active > div.button-container > a'
-    @navigation_hovermenu_path = '.advanced-menu > div.menu--container.menu--is-active > div.content--wrapper.has--content.has--teaser > div.menu--container-flyout > ul > li:first-child'
+    @navigation_hovermenu_path = '.menu--is-active > .content--wrapper > .menu--container-flyout > ul > li:first-child'#'.advanced-menu > div.menu--container.menu--is-active > div.content--wrapper.has--content.has--teaser > div.menu--container-flyout > ul > li:first-child'
     @navigation_path = '.navigation-main'
     @navigation_hovermenu_close_path = 'form > label'
     @navigation_sidebar_sub_path = '.navigation--entry.is--active.has--sub-categories.has--sub-children > ul > li:first-child > a '#
