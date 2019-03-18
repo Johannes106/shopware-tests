@@ -10,4 +10,4 @@ output/html_reports.html
 output/Api_main.rb
 skipped_scenarios.txt
 features/support/emarsys/emarsys_accounts.yml
-features/support/emarsys/emarsys_main.rb
+output/*
