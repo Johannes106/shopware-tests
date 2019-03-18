@@ -91,6 +91,7 @@ GEM
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
     rubyzip (1.2.1)
+    safe_yaml (1.0.5)
     sauce_whisk (0.1.0)
       json
       rest-client (~> 2.0)
@@ -115,8 +116,9 @@ DEPENDENCIES
   httparty (= 0.16.0)
   mechanize (= 2.7.5)
   rspec (= 3.7.0)
+  safe_yaml
   sauce_whisk (= 0.1.0)
   selenium-webdriver (= 3.9.0)
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
