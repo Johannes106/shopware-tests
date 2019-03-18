@@ -9,3 +9,5 @@ failed_scenarios.txt
 output/html_reports.html
 output/Api_main.rb
 skipped_scenarios.txt
+output/*
+features/support/emarsys/emarsys_accounts.yml
