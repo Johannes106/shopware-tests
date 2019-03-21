@@ -2,9 +2,9 @@ require 'emarsys'
 require_relative "emarsys_auth.rb"
 
 class Emarsys_api
-  attr_reader :mailaddress
+  attr_accessor :mailaddress
 
-  def initialize(mailaddress)
+  def initialize()
     @mailaddress = mailaddress
   end
 
