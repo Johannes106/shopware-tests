@@ -4,31 +4,31 @@ module MyWorld
   def settings
     @settings ||= Settings.new
   end
-  
+
   def article
   	@article ||= Article.new
   end
-  
+
   def user
     @user ||= User.new
   end
-  
+
   def csspathes_websitebasics
     @websitebasics ||= Csspathes_Websitebasics.new
   end
-  
+
   def websitebasics
     return {:pathes => csspathes_websitebasics, :data => article}
   end
-  
-  def csspathes_search  
+
+  def csspathes_search
     @search ||= Csspathes_Search.new
   end
 
-  def search 
+  def search
     return {:pathes => csspathes_search, :data => article}
   end
-  
+
   def csspathes_directorder
     @directorder ||= Csspathes_Directorder.new
   end
@@ -36,7 +36,7 @@ module MyWorld
   def directorder
     return {:pathes => csspathes_directorder, :data => article}
   end
-  
+
   def csspathes_productcart
     @productcart ||= Csspathes_Productcart.new
   end
@@ -72,7 +72,7 @@ module MyWorld
   def url_functions
     @url_functions ||=UrlFunctions.new
   end
-  
+
   def shopware
     @shopware ||=ShopwareApi.new
   end
@@ -85,6 +85,9 @@ module MyWorld
     @logger ||= Logger.new(STDOUT)
   end
 
+  def emarsys_api
+    @emarsys_api ||=Emarsys_api.new
+  end
 end
 
 World(MyWorld)
