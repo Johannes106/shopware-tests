@@ -10,12 +10,14 @@ class Emarsys_api
 
   def exists_mailaddress_in_db?
     mailaddress = @mailaddress
-    #Check: if a mailaddress exists in the db
-    result = Emarsys::Contact.search(key_id: 'email', key_values: ["#{mailaddress}"], fields: [3])
-    if (result==true)
+    #Check: if a mailaddress exists in the db result is some text it not exist result=false
+    request = Emarsys::Contact.search(key_id: 'email', key_values: ["#{mailaddress}"], fields: [3])
+    result = request.data['result']
+    if (result)
       puts "OK, mail is registered"
+      result=true
     else
-      abort ("mailaddress is not in DB")
+      puts ("mailaddress is not in DB")
     end
     return result
   end
