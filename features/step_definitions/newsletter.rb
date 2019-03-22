@@ -7,17 +7,17 @@ When("I enter a mailaddress into the field of newsletter registration") do
   homepage_footer_newsletter_box_path = '#newsletter--form'
   homepage_footer_newsletter_field_path = '.newsletter--field'
   # enter mailaddress
-  @newsletter_box = page.find(homepage_footer_newsletter_box_path)
-  newsletter_box = @newsletter_box
+  Newsletter_box = page.find(homepage_footer_newsletter_box_path)
+  newsletter_box = Newsletter_box
   form_set_value(newsletter_box, "email", email, homepage_footer_newsletter_field_path)
 end
 
 When("I push the send button") do
   #vars
-  newsletter_box = @newsletter_box
+  newsletter_box = Newsletter_box
   homepage_footer_newsletter_send_button_path = 'button'
   # click button
-  element = @newsletter_box.find(homepage_footer_newsletter_send_button_path)
+  element = Newsletter_box.find(homepage_footer_newsletter_send_button_path)
   element.click
 end
 
@@ -49,12 +49,12 @@ When("I fill out the register form") do
   form_set_value(newsletter_box_registration, "street", street, newsletter_form_street_field_path)
   form_set_value(newsletter_box_registration, "postcode", postcode, newsletter_form_postcode_field_path)
   form_set_value(newsletter_box_registration, "city", city, newsletter_form_city_field_path)
-  @newsletter_box_registration = newsletter_box_registration
+  Newsletter_box_registration = newsletter_box_registration
 end
 
 When("I save the form") do
   newsletter_form_send_button_path = 'button'
-  newsletter_box_registration = @newsletter_box_registration
+  newsletter_box_registration = Newsletter_box_registration
   # push the button
   element = newsletter_box_registration.find(newsletter_form_send_button_path)
   element.click
@@ -85,6 +85,65 @@ Then("I should find the mailaddress in emarsys") do
   else
     email = account[:data].eMail
     emarsys_api.mailaddress = email
-    emarsys_api.exists_mailaddress_in_db?
+    exist = emarsys_api.exists_mailaddress_in_db?
+    emarsys_api.delete_mailaddress
+
+    expect(server_status_value).to eq(exist)
   end
+end
+
+When("I set the option to get a newsletter") do
+  account_accountinfo_newsletter_box_path = '.account--newsletter'
+  account_accountinfo_newsletter__acception_checkbox_path = '#newsletter'
+
+  newsletter_box_account = page.find(account_accountinfo_newsletter_box_path)
+  newsletter_box_account.find(account_accountinfo_newsletter__acception_checkbox_path).click
+end
+
+Then("I should see a hint for changing settings") do
+  newsletter_page_acception_alert_path = '.is--success'
+  page.find(newsletter_page_acception_alert_path)
+end
+
+#NOT USED ANYMORE: Then I should "not" find the mailaddress in emarsys
+Then("I should {string} find the mailaddress in emarsys") do |string|
+  if(string.eql?("not"))
+    puts "NOT"
+    email = account[:data].eMail
+    emarsys_api.mailaddress = email
+    exist = emarsys_api.exists_mailaddress_in_db?
+    puts "exist: #{exist}"
+  else
+    puts "should:#{string}"
+    email = account[:data].eMail
+    emarsys_api.mailaddress = email
+    exist = emarsys_api.exists_mailaddress_in_db?
+    puts "exist: #{exist}"
+  end
+end
+
+Given("I have completed an order") do
+  steps {
+    And I already created an user account
+    Given I am logged in
+    When I add an article to my cart by ajax
+    Then the product cart contains an article
+    And I am on the checkout page
+    When I set payment
+    And I set shipping
+    When I am looking for all different paymentmethods
+    When I click the button to continue on the checkoutpage
+    When I send my order
+    Then Shopware should have my order
+  }
+
+end
+
+When("my mailaddress was sent to emarsys automatically") do
+  #it is not working in the moment because no order is sent on production
+  email = account[:data].eMail
+  emarsys_api.mailaddress = email
+  exist = emarsys_api.exists_mailaddress_in_db?
+  emarsys_api.delete_mailaddress
+  expect(server_status_value).to eq(exist)
 end
