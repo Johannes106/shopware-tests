@@ -88,7 +88,7 @@ Then("I should find the mailaddress in emarsys") do
     exist = emarsys_api.exists_mailaddress_in_db?
     emarsys_api.delete_mailaddress
 
-    expect(server_status_value).to eq(exist)
+    expect(exist).to eq(true)
   end
 end
 
@@ -113,37 +113,36 @@ Then("I should {string} find the mailaddress in emarsys") do |string|
     emarsys_api.mailaddress = email
     exist = emarsys_api.exists_mailaddress_in_db?
     puts "exist: #{exist}"
+    expect(exist).to eq(false)
   else
     puts "should:#{string}"
     email = account[:data].eMail
     emarsys_api.mailaddress = email
     exist = emarsys_api.exists_mailaddress_in_db?
     puts "exist: #{exist}"
+    expect(exist).to eq(true)
   end
 end
 
 Given("I have completed an order") do
-  steps {
-    And I already created an user account
-    Given I am logged in
-    When I add an article to my cart by ajax
-    Then the product cart contains an article
-    And I am on the checkout page
-    When I set payment
-    And I set shipping
-    When I am looking for all different paymentmethods
-    When I click the button to continue on the checkoutpage
-    When I send my order
-    Then Shopware should have my order
-  }
-
+    step("I already created an user account")
+    step("I am logged in")
+    step("I add an article to my cart by ajax")
+    step("the product cart contains an article")
+    step("I am on the checkout page")
+    step("I set payment")
+    step("I set shipping")
+    step("I am looking for all different paymentmethods")
+    step("I click the button to continue on the checkoutpage")
+    step("I send my order")
+    step("Shopware should have my order")
 end
 
-When("my mailaddress was sent to emarsys automatically") do
+Then ("my mailaddress was sent to emarsys automatically") do
   #it is not working in the moment because no order is sent on production
   email = account[:data].eMail
   emarsys_api.mailaddress = email
   exist = emarsys_api.exists_mailaddress_in_db?
   emarsys_api.delete_mailaddress
-  expect(server_status_value).to eq(exist)
+  expect(exist).to eq(true)
 end
