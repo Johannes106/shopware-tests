@@ -70,7 +70,7 @@ Then("I should see a box of acception") do
   rescue Capybara::ElementNotFound => e
     puts "\033[35m#{e.inspect}\033[0m\n"
     htmlcode = page.html
-    #@captcha_appears = true
+    @captcha_appears = true
     puts "> Captcha appears: #{html.include?(newsletter_page_captcha_path)} so I can not do anything more"
   end
   # puts "> write to log"
