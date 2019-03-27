@@ -11,22 +11,26 @@ class Emarsys_api
   def exists_mailaddress_in_db?
     mailaddress = @mailaddress
     #Check: if a mailaddress exists in the db result is some text it not exist result=false
+    result = false
     request = Emarsys::Contact.search(key_id: 'email', key_values: ["#{mailaddress}"], fields: [3])
-    result = request.data['result']
-    if (result)
+      #if request=0 = no mailadress exists
+    if (request.code.nonzero?)
+      puts "request.code:#{request.code}"
       puts "OK, mail is registered"
       result=true
     else
-      puts ("mailaddress is not in DB")
+      puts "mailaddress is not in DB"
     end
     return result
+    # end
   end
 
   def delete_mailaddress
     res = exists_mailaddress_in_db?
-    puts "res: #{res.data['result']}"
     if (res==true)
-      Emarsys::Contact.delete(key_id: 'email', key_value: "#{mailaddress}")
+      puts res
+      #Emarsys::Contact.delete(key_id: 'email', key_value: "#{mailaddress}")
+      puts "#{mailaddress} is deleted"
     end
   end
 end
