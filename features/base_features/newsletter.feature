@@ -29,5 +29,4 @@ Scenario: unregister and register for newsletter within my account
 @newsletter_checkout_newsletter
 Scenario: complete an order to get a newsletter
   Given I have completed an order
-  When my mailaddress was sent to emarsys automatically
   Then I should find the mailaddress in emarsys
