@@ -5,6 +5,7 @@ class Emarsys_auth
   # configure SafeYAML
   SafeYAML::OPTIONS[:default_mode] = :safe
 
+
   # use one password for each whole session/run
   Emarsys.allow_default_configuration = true
   # grep account data of yaml file
