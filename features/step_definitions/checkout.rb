@@ -177,12 +177,13 @@ When(/^I send my order$/) do
   step("I activate the box of agb")
 
   element = find_secure(checkout_orderbutton_path)
-  if VARS_ENV.r_system == 'live'
-    puts "> found orderbutton but not press"
-    next
-  else
+  if (ENV['MAKE_ORDER'])
+    @made_order=true
     element.click
     puts "--> click orderbutton"
+    next
+  else
+    puts "> found orderbutton but not press"
   end
 end
 
@@ -451,10 +452,7 @@ When(/^I set shipping$/) do
 end
 
 Then(/^Shopware should have my order$/) do
-  if ENV['SYSTEM'] == 'live'
-    puts "> Shopware can not have my order because i have not pressed the orderbutton"
-    next
-  else
+  if @made_order
     key = "email"
     eMail = account[:data].eMail
     url_part = 'finish'
@@ -470,5 +468,8 @@ Then(/^Shopware should have my order$/) do
     puts ">> cancel orders of customer with #{key}:#{eMail}"
     shopware.updateOrderStatusForMail(eMail)
     #shopware.updateOrderStatusFor(key, eMail)
+    next
+  else
+    puts "> Shopware can not have my order because i have not pressed the orderbutton"
   end
 end
