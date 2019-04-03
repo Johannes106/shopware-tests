@@ -152,8 +152,6 @@ module ShopwareFunctions
     url_request = "#{url_data}/#{filter}"
     puts "url_request:#{url_request}"
     response_data_customer = readData(url_request)
-    puts "response_data_customer:#{response_data_customer}"
-    #puts "response_data_customer:#{response_data_customer}"
     amount_total_orders = response_data_customer['total']
     puts "amount_total_orders:#{amount_total_orders}"
     counter=0
