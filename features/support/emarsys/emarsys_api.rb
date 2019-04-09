@@ -14,8 +14,7 @@ class Emarsys_api
     result = false
     request = Emarsys::Contact.search(key_id: 'email', key_values: ["#{mailaddress}"], fields: [3])
       #if request=0 = no mailadress exists
-    if (request.code.nonzero?)
-      puts "request.code:#{request.code}"
+    if (request.data['result'])
       puts "OK, mail is registered"
       result=true
     else
@@ -28,8 +27,7 @@ class Emarsys_api
   def delete_mailaddress
     res = exists_mailaddress_in_db?
     if (res==true)
-      puts res
-      #Emarsys::Contact.delete(key_id: 'email', key_value: "#{mailaddress}")
+      Emarsys::Contact.delete(key_id: 'email', key_value: "#{mailaddress}")
       puts "#{mailaddress} is deleted"
     end
   end

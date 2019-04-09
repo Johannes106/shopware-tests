@@ -86,9 +86,6 @@ Then("I should find the mailaddress in emarsys") do
   else
     email = account[:data].eMail
     emarsys_api.mailaddress = email
-    exist = emarsys_api.exists_mailaddress_in_db?
-    puts "#{emarsys_api.exists_mailaddress_in_db?}"
-    puts "test"
     emarsys_api.delete_mailaddress
     #expect(exist).to eq(true)
   end
