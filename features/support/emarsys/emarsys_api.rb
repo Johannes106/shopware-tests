@@ -1,5 +1,5 @@
 require 'emarsys'
-require_relative "emarsys_auth.rb"
+#require_relative "emarsys_auth.rb"
 
 class Emarsys_api
   attr_accessor :mailaddress
