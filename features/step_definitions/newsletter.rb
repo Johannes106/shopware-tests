@@ -85,8 +85,9 @@ Then("I should find the mailaddress in emarsys") do
     puts "> A captcha blocks the registration so i can not find the mailaddress in emnarsys"
   else
     email = account[:data].eMail
-    emarsys_api.mailaddress = email
-    emarsys_api.delete_mailaddress
+    step('my mailaddress was sent to emarsys automatically')
+    #emarsys_api.mailaddress = email
+    #emarsys_api.delete_mailaddress
     #expect(exist).to eq(true)
   end
 end
@@ -106,20 +107,30 @@ end
 
 #NOT USED ANYMORE: Then I should "not" find the mailaddress in emarsys
 Then("I should {string} find the mailaddress in emarsys") do |string|
-  if(string.eql?("not"))
-    puts "NOT"
-    email = account[:data].eMail
-    emarsys_api.mailaddress = email
-    exist = emarsys_api.exists_mailaddress_in_db?
-    puts "exist: #{exist}"
-    expect(exist).to eq(false)
+  # rel path
+  backward_path = '../.' #go back -> emarsys/support/features/workspace
+  rel_path = File.join(File.expand_path(backward_path), 'emarsys_accounts.yml')
+  yaml_exists = File.file?(rel_path)
+
+  if (yaml_exists)
+    if(string.eql?("not"))
+      puts "NOT"
+      email = account[:data].eMail
+      emarsys_api.mailaddress = email
+      exist = emarsys_api.exists_mailaddress_in_db?
+      puts "exist: #{exist}"
+      expect(exist).to eq(false)
+    else
+      puts "should:#{string}"
+      email = account[:data].eMail
+      emarsys_api.mailaddress = email
+      exist = emarsys_api.exists_mailaddress_in_db?
+      puts "exist: #{exist}"
+      expect(exist).to eq(true)
+    end
   else
-    puts "should:#{string}"
-    email = account[:data].eMail
-    emarsys_api.mailaddress = email
-    exist = emarsys_api.exists_mailaddress_in_db?
-    puts "exist: #{exist}"
-    expect(exist).to eq(true)
+    puts "> There are no account data for access"
+    puts "> Place the yaml here: #{rel_path}"
   end
 end
 
@@ -138,10 +149,20 @@ Given("I have completed an order") do
 end
 
 Then ("my mailaddress was sent to emarsys automatically") do
-  #it is not working in the moment because no order is sent on production
-  email = account[:data].eMail
-  emarsys_api.mailaddress = email
-#  puts "#{emarsys_api.exists_mailaddress_in_db?}"
-  emarsys_api.delete_mailaddress
-  #expect(exist).to eq(true)
+  # look for yaml
+  backward_path = '../.' #go back -> emarsys/support/features/workspace
+  rel_path = File.join(File.expand_path(backward_path), 'emarsys_accounts.yml')
+  yaml_exists = File.file?(rel_path)
+
+  if (yaml_exists)
+    #it is not working in the moment because no order is sent on production
+    email = account[:data].eMail
+    emarsys_api.mailaddress = email
+  #  puts "#{emarsys_api.exists_mailaddress_in_db?}"
+    emarsys_api.delete_mailaddress
+    #expect(exist).to eq(true)
+  else
+    puts "> There are no account data for access"
+    puts "> Place the yaml here: #{rel_path}"
+  end
 end
