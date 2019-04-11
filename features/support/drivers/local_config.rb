@@ -4,7 +4,6 @@ if ENV['DRIVER'] == 'local'
   require 'headless'
   require 'capybara/cucumber'
   require 'rspec'
-  require 'appium_capybara'
 
   module Local_config
 
