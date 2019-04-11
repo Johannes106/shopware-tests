@@ -9,3 +9,4 @@ gem "selenium-webdriver", '3.9.0'#, '2.53.4'
 gem 'sauce_whisk', '0.2.0'
 gem 'httparty', '0.16.0'#, '0.14.0'
 gem 'mechanize', '2.7.5'
+gem "safe_yaml"
