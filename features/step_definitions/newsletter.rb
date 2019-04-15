@@ -139,13 +139,13 @@ end
 
 Then ("my mailaddress was sent to emarsys automatically") do
   # puts "YAML:#{yaml_exists}"
-  # if (yaml_exists)
+  if (@yaml_exists)
     email = account[:data].eMail
     emarsys_api.mailaddress = email
   #  puts "#{emarsys_api.exists_mailaddress_in_db?}"
     emarsys_api.delete_mailaddress
     #expect(exist).to eq(true)
-  # else
-  #   puts "> No yaml exists"
-  # end
+  else
+    puts "> No yaml exists"
+  end
 end
