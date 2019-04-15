@@ -1,10 +1,8 @@
 require 'safe_yaml'
 require 'emarsys'
 
-#only load this file on start if @yaml_exists==true because the files in support-folder will be load on start of cucumber (before loading feature-files) and then there will be thrown an error if no yaml exist
-#set value of @yaml_exist in newsletter.rb
 #puts "Emarsys_auth:#{yaml_exists}"
-if (@yaml_exists)
+if ($yaml_exists)
   class Emarsys_auth
     # configure SafeYAML
     SafeYAML::OPTIONS[:default_mode] = :safe

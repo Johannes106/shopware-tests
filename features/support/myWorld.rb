@@ -1,4 +1,3 @@
-puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MyWorld"
 module MyWorld
   require 'logger'
 
@@ -87,10 +86,7 @@ module MyWorld
   end
 
   def emarsys_api
-    puts "function emarsys_api"
-    if (@yaml_exists)
-      @emarsys_api ||=Emarsys_api.new
-    end
+    @emarsys_api ||=Emarsys_api.new
   end
 end
 

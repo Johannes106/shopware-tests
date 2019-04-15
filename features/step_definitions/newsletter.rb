@@ -106,6 +106,7 @@ end
 
 #NOT USED ANYMORE: Then I should "not" find the mailaddress in emarsys
 Then("I should {string} find the mailaddress in emarsys") do |string|
+  if($yaml_exists)
     if(string.eql?("not"))
       puts "NOT"
       email = account[:data].eMail
@@ -121,6 +122,7 @@ Then("I should {string} find the mailaddress in emarsys") do |string|
       puts "exist: #{exist}"
       expect(exist).to eq(true)
     end
+  end
 end
 
 Given("I have completed an order") do
@@ -139,12 +141,10 @@ end
 
 Then ("my mailaddress was sent to emarsys automatically") do
   # puts "YAML:#{yaml_exists}"
-  if (@yaml_exists)
+  if ($yaml_exists)
     email = account[:data].eMail
     emarsys_api.mailaddress = email
-  #  puts "#{emarsys_api.exists_mailaddress_in_db?}"
     emarsys_api.delete_mailaddress
-    #expect(exist).to eq(true)
   else
     puts "> No yaml exists"
   end
