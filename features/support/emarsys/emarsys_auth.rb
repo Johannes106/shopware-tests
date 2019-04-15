@@ -1,11 +1,5 @@
-require 'safe_yaml'
 require 'emarsys'
-
-
-
 class Emarsys_auth
-  # configure SafeYAML
-  SafeYAML::OPTIONS[:default_mode] = :safe
 
   # rel path
   backward_path = '../.' #go back -> emarsys/support/features/workspace
@@ -16,6 +10,10 @@ class Emarsys_auth
   end
   # rel_path = File.join(__dir__, 'emarsys_accounts.yml')
   if ($yaml_exists)
+    require 'safe_yaml'
+
+    # configure SafeYAML
+    SafeYAML::OPTIONS[:default_mode] = :safe
     # use one password for each whole session/run
     Emarsys.allow_default_configuration = true
     # grep account data of yaml file
