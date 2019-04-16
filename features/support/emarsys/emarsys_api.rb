@@ -1,4 +1,4 @@
-#require 'emarsys'
+require 'emarsys'
 #require_relative "emarsys_auth.rb"
 
 class Emarsys_api
