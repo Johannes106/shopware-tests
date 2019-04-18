@@ -5,6 +5,11 @@ Feature: website_basics
     i will be able to register me the newsletter
     to get a newsletter sent
 
+@pulsiva
+@vega
+@hotelwaesche
+@hw_jobeline
+@v_jobeline
 @newsletter
 @newsletter_footer
 Scenario: register for newsletter within the footer
@@ -16,6 +21,11 @@ Scenario: register for newsletter within the footer
   Then I should see a box of acception
   Then I should find the mailaddress in emarsys
 
+@pulsiva
+@vega
+@hotelwaesche
+@hw_jobeline
+@v_jobeline
 @newsletter
 @newsletter_account
 @newsletter_account_unregister_register
@@ -24,9 +34,13 @@ Scenario: unregister and register for newsletter within my account
   When I set the option to get a newsletter
   Then I should see a hint for changing settings
 
+@pulsiva
+@vega
+@hotelwaesche
+@hw_jobeline
+@v_jobeline
 @newsletter
 @newsletter_checkout
-@newsletter_checkout_newsletter
 Scenario: complete an order to get a newsletter
   Given I have completed an order
   Then I should find the mailaddress in emarsys
