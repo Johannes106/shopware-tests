@@ -49,12 +49,19 @@ And(/^I add an article to my cart by ajax$/) do
   website_url = settings.urlHttps
   sku = productcart[:data].sku
   amount = productcart[:data].amount
-  #assembling url:  
+  #assembling url:
   ajax_params_function = "checkout/ajaxAddArticleCart?callback=jQuery"
   ajax_params_sku = "&sAdd=#{sku}"
   ajax_params_amount = "&sQuantity=#{amount}"
   ajax_url = "#{website_url}#{ajax_params_function}#{ajax_params_sku}#{ajax_params_amount}"
-  visit_secure(ajax_url)
+  begin
+    visit_secure(ajax_url)
+  rescue Mechanize::ResponseCodeError => e
+    puts "> AJAX is not working -> #{e}"
+    puts ">> add an article manually"
+    step("I am on the product page of an article")
+    step("I add an article to the product cart by clicking the button to push it into the cart")
+  end
 end
 
 When(/^I click on the button to continue shopping$/) do
