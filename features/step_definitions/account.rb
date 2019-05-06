@@ -40,6 +40,7 @@ And(/^no user account with my email exists$/) do
 end
 
 Given(/^I already created an user account$/) do
+
   eMail = account[:data].eMail
   shopware.setDigest(ENV['SHOPWARE_USERNAME'], ENV['SHOPWARE_PASSWORD'], settings.urlBackend)
   customer_id_determined = shopware.getCustomerIdByMail(eMail)
@@ -47,19 +48,22 @@ Given(/^I already created an user account$/) do
   if customer_id_determined.is_a?(String)
     puts "-> register an user by api"
     step('I register an user by api')
-    # puts "I am on the registration page"
-    # step("I am on the registration page")
-    # puts "I create a new account with my data"
-    # step("I create a new account with my data")
-    # puts "I should be on my account page"
-    # step("I should be on my account page")
-    # puts "I log me out"
-    # step("I log me out")
-    # puts "I am on the registration page"
-    # step("I am on the registration page")
   else
     puts   "-> there exists an unique account"
   end
+end
+
+When(/^I register an account manually$/) do
+  puts "I am on the registration page"
+  step("I am on the registration page")
+  puts "I create a new account with my data"
+  step("I create a new account with my data")
+  puts "I should be on my account page"
+  step("I should be on my account page")
+  puts "I log me out"
+  step("I log me out")
+  puts "I am on the registration page"
+  step("I am on the registration page")
 end
 
 When(/^I touch the box to create an new account$/) do
@@ -285,6 +289,7 @@ end
 
 Given(/^I am logged in$/) do
   #pathes
+  account_login_errormessage_path = account[:pathes].account_login_errormessage_path
   account_registerform_accordion_login_path = account[:pathes].account_registerform_accordion_login_path
 
   if (ENV['BROWSER'] == 'iPhone')
@@ -300,6 +305,10 @@ Given(/^I am logged in$/) do
   step ("I already created an user account")
   puts "I login with valid informations"
   step ("I login with valid informations")
+  if (page.has_css?(account_login_errormessage_path))
+    puts "I register an account manually"
+    step("I register an account manually")
+  end
   puts "I should be on my account page"
   step ("I should be on my account page")
 end
