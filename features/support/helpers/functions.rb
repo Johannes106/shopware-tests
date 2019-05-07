@@ -385,7 +385,6 @@ module MyFunctions
     begin # identiy kind of error: check if element has class 'has--error'
       find(".has--error")
       puts "\033[35m>>> There is a errormessage\033[0m\n"
-      puts "\033[35m#{e.inspect}\033[0m\n"
       # are there several elements of this errortyoe exist
     rescue Capybara::Ambiguous => e
       puts "\033[35m#{e.inspect}\033[0m\n"
