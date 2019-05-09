@@ -126,7 +126,7 @@ Then("I should {string} find the mailaddress in emarsys") do |string|
 end
 
 Given("I have completed an order") do
-    step("I already created an user account")
+    #step("I already created an user account")
     step("I am logged in")
     step("I add an article to my cart by ajax")
     step("the product cart contains an article")
