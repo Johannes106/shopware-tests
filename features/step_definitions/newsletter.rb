@@ -133,7 +133,6 @@ Given("I have completed an order") do
     step("I am on the checkout page")
     step("I set payment")
     step("I set shipping")
-    step("I am looking for all different paymentmethods")
     step("I click the button to continue on the checkoutpage")
     step("I send my order")
     step("Shopware should have my order")
