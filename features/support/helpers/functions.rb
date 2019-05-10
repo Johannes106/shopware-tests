@@ -26,6 +26,11 @@ module MyFunctions
     end
   end
 
+  def wait_for_ready
+    jsWaitForReady=jsfunctions.waitForReady
+    page.driver.browser.execute_script(jsWaitForReady)
+  end
+
   def refreshPage
     jsReload=jsfunctions.refreshPage
     page.driver.browser.execute_script(jsReload)
@@ -53,13 +58,14 @@ module MyFunctions
 
   #select value by text on dropdown-menu
   def form_set_dropdown(var_text, option_value, dropdown_path)
-    if(option_value)
+    if(option_value) && (option_value != 'Espana')
       puts "- set #{var_text}: #{option_value}"
       if(page.find(dropdown_path))
         page.find("#{dropdown_path} option", :text => option_value).click
       end
     else
       puts "> variable for dropdown is not defined"
+      puts "> or in #{option_value} skip it"
     end
   end
 
