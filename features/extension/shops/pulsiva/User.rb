@@ -124,7 +124,7 @@ class User
       when 'se' then 'Sverige'
       when 'nl' then 'Nederland'
       when 'be' then 'Belgique'
-      when 'es' then nil
+      when 'es' then 'Espana'
     end
     @country_area = case ENV['COUNTRY']
       when 'de' then nil
