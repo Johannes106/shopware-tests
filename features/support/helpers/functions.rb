@@ -229,6 +229,9 @@ module MyFunctions
       when "Espana"
         puts "Spain"
         id_country = 27
+      when "USA"
+        puts "USA"
+        id_country = 28
     end
     return id_country
   end
