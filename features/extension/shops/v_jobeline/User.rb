@@ -143,8 +143,8 @@ class User
       when 'se' then 'Sverige'
       when 'nl' then 'Nederland'
       when 'be' then 'Belgique'
-      when 'es' then nil
-      when 'en' then 'GERMANY'
+      when 'es' then 'Espana'
+      when 'en' then 'USA'
     end
     @country_area = case ENV['COUNTRY']
       when 'de' then nil
@@ -196,7 +196,7 @@ class User
       when 'nl' then 'Voornaam'
       when 'be' then 'Prenom'
       when 'es' then 'Nombre'
-      when 'en' then 'First'
+      when 'en' then 'Firstname'
     end
     @lastname = case ENV['COUNTRY']
       when 'de' then 'Nachname'
@@ -209,7 +209,7 @@ class User
       when 'nl' then 'Achternaam'
       when 'be' then 'Nom'
       when 'es' then 'Apellido'
-      when 'en' then 'Apellido'
+      when 'en' then 'Lastname'
     end
     @department = case ENV['COUNTRY']
       when 'de' then nil
@@ -287,7 +287,7 @@ class User
       when 'nl' then '5384 VT'
       when 'be' then '1050'
       when 'es' then '08009'
-      when 'en' then '86639'
+      when 'en' then '33140'
     end
     @city = case ENV['COUNTRY']
       when 'de' then 'Wertingen'
@@ -300,7 +300,7 @@ class User
       when 'nl' then 'Heesch'
       when 'be' then 'Ixelles'
       when 'es' then 'Barcelona'
-      when 'en' then 'Wertingen'
+      when 'en' then 'Miami'
     end
     @telephone = case ENV['COUNTRY']
       when 'de' then '01234567'
@@ -390,6 +390,9 @@ class User
       when "Espana"
         puts "Spain"
         id_country = 21
+      when "USA"
+        puts "Usa"
+        id_country = 28
     end
     return id_country
   end
