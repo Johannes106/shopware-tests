@@ -92,3 +92,4 @@ end
 
 World(MyWorld)
 World(MyFunctions)
+World(WaitForAjax)

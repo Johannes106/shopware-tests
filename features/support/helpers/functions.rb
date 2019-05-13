@@ -31,6 +31,11 @@ module MyFunctions
     page.driver.browser.execute_script(jsWaitForReady)
   end
 
+  def wait_for_ready_jQuery
+    jsWaitForReadyJQuery=jsfunctions.waitForReadyJQuery
+    page.driver.browser.execute_script(jsWaitForReadyJQuery)
+  end
+
   def refreshPage
     jsReload=jsfunctions.refreshPage
     page.driver.browser.execute_script(jsReload)
@@ -331,6 +336,7 @@ module MyFunctions
     # else
     #   puts "In #{VARS_ENV.r_country} is no popup"
     # end
+    wait_for_ajax
     if args.size == 1
       #puts "find_secure_with_one_arg:#{args}"
       element = find_secure_with_one_arg(*args)
