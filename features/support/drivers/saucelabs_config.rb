@@ -62,7 +62,9 @@ if ENV['DRIVER'] == 'saucelabs'
     end
     @caps[:name] = "Shopware tests: #{ENV['BROWSER']} #{ENV['SYSTEM']} #{ENV['SHOP']} #{ENV['COUNTRY']} #{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']}"
     @caps[:build] = "#{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']}"
-    @caps[:autoAcceptAlerts] = true
+    @caps[:autoAcceptAlerts]   = true
+    @caps[:capturePerformance] = true
+    @caps[:extendedDebugging]  = true
     #@caps[:unexpectedAlertBehaviour] = "dismiss"
     if (ENV['SYSTEM'] == 'int')
       puts "Timeout is set to 65"
