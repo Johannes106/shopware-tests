@@ -1,12 +1,12 @@
 #hwjobeline
 class Article
   attr_accessor :sub_category, :category, :category_language_changed, :productnumber, :sku, :amount, :name, :url_add_comand
-  
+
   def initialize
     @sub_category = case ENV['COUNTRY']
-      when (/de/) then 'Kochhosen'
-      when (/at/) then 'Kochhosen'
-      when (/ch/) then 'Kochhosen'
+      when (/de/) then 'Kochmützen & Kopfbedeckungen'
+      when (/at/) then 'Kochmützen & Kopfbedeckungen'
+      when (/ch/) then 'Kochmützen & Kopfbedeckungen'
     end
     @category = case ENV['COUNTRY']
       when (/de/) then 'Kochbekleidung'
@@ -18,14 +18,14 @@ class Article
       when (/be/) then nil
     end
     @productnumber = case ENV['COUNTRY']
-      when (/de/) then '100710'
-      when (/at/) then '100710'
-      when (/ch/) then '100710'
+      when (/de/) then '118747'
+      when (/at/) then '118747'
+      when (/ch/) then '118747'
     end
     @sku = case ENV['COUNTRY']
-      when (/de/) then '10041838'#without i!
-      when (/at/) then '10041838'
-      when (/ch/) then '10041838'
+      when (/de/) then '10042537'#without i!
+      when (/at/) then '10042537'
+      when (/ch/) then '10042537'
     end
     @amount = case ENV['COUNTRY']
       when (/de/) then 2
@@ -40,10 +40,10 @@ class Article
       when (/es/) then 2
     end
     #no umlauts
-    @name = case ENV['COUNTRY'] 
-      when (/de/) then 'HERRENKOCHHOSE NICK'
-      when (/at/) then 'HERRENKOcHHOSE NICK'
-      when (/ch/) then 'HERRENKOcHHOSE NICK'
+    @name = case ENV['COUNTRY']
+      when (/de/) then 'Stewardmütze Willy'
+      when (/at/) then 'Stewardmütze Willy'
+      when (/ch/) then 'Stewardmütze Willy'
     end
     @url_add_comand = case ENV['COUNTRY']
       when (/de/) then 'EMGroupDirectOrder'
