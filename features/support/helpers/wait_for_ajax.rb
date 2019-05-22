@@ -1,7 +1,7 @@
 module WaitForAjax
 
   def wait_for_ajax
-    max_time = Capybara::Helpers.monotonic_time + Capybara.default_max_wait_time
+    max_time = Capybara::Helpers.monotonic_time + 20
     while Capybara::Helpers.monotonic_time < max_time
       finished = finished_all_ajax_requests?
       if finished
