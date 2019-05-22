@@ -16,7 +16,7 @@ Then("css elements should be modified by stylesheet") do
   #get style of webdriver element
   margin_right = webdriver_element.style('margin-right')
   puts ("> margin_right:#{margin_right}")
-  expect(margin_right).to eq(('0px')), 
+  expect(margin_right).to eq(('0px')),
      ".page-wrap: Expect to get margin of 0px, but i get #{margin_right}"
   #puts "Style: #{webdriver_element.style('margin-right')}"
   #puts "Style: #{node_element.native.style('margin-left')}"
@@ -40,7 +40,7 @@ Then(/^I should see all basic elements$/) do
   puts "header exists"
   expect(page).to have_css(homepage_content_searchfield_path),
       "Expect to find the css-element (#{homepage_content_searchfield_path}) but the page with the url #{current_url} has no such element"
-  puts "searchfield exists"  
+  puts "searchfield exists"
   find_secure(homepage_content_navi_path)
   expect(page).to have_css(homepage_content_navi_path),
       "Expect to find the css-element (#{homepage_content_navi_path}) but the page with the url #{current_url} has no such element"
@@ -71,7 +71,7 @@ Then(/^I should see all basic mobile elements$/) do
   puts "header exists"
   expect(page).to have_css(homepage_content_searchfield_path),
       "Expect to find the css-element (#{homepage_content_searchfield_path}) but the page with the url #{current_url} has no such element"
-  puts "searchfield exists"  
+  puts "searchfield exists"
   find_secure(homepage_content_navi_burger_path)
   expect(page).to have_css(homepage_content_navi_burger_path),
       "Expect to find the css-element (#{homepage_content_navi_burger_path}) but the page with the url #{current_url} has no such element"
@@ -91,8 +91,8 @@ When(/^I change the language by clicking the button$/) do
   #var
   language_change_to = user.language_change_to
   #pathes
-  homepage_content_navi_language_trigger_path = 'nav > div.top-bar--language.navigation--entry > form > div > div.js--fancy-select.field--select > div.js--fancy-select-trigger'
-  homepage_content_navi_language_option_path = 'nav > div.top-bar--language.navigation--entry > form > div > div.js--fancy-select.field--select > div.html-option-wrap > div'
+  homepage_content_navi_language_trigger_path = '.top-bar--language.navigation--entry > form > div'
+  homepage_content_navi_language_option_path = '.html-option'
 
   if language_change_to
     find_secure(homepage_content_navi_language_trigger_path)
@@ -101,7 +101,7 @@ When(/^I change the language by clicking the button$/) do
     element = find(homepage_content_navi_language_option_path, :text => language_change_to)
     element.click
     puts "> selected #{language_change_to}"
-  else 
+  else
     puts "> in the shop of this country I can not change the language"
   end
 end
@@ -110,11 +110,11 @@ Then(/^the url should has changed$/) do
   #var
   language_change_to = user.language_change_to
   country_contraction_language_change_to = user.country_contraction_language_change_to
-  
+
   if language_change_to
     url = current_url
     puts "> current url: #{url}"
-    expect(url).to include(country_contraction_language_change_to), 
+    expect(url).to include(country_contraction_language_change_to),
        "expected new url includes '#{country_contraction_language_change_to}' but it is '#{current_url}'"
   end
 end
@@ -123,10 +123,10 @@ Then(/^the menu is in specific language$/) do
   #var
   language_change_to = user.language_change_to
   category_language_changed = websitebasics[:data].category_language_changed
-  
+
   #pathes
   navigation_menu_path = websitebasics[:pathes].navigation_menu_path
-  
+
   if language_change_to
     navigation = find_secure(navigation_menu_path)
     navigation_txt = navigation.text
@@ -157,8 +157,8 @@ When(/^I check all hreflang for correct url$/) do
   header.all('link', :visible => false).map { |a| a['rel'] }
 
   url_canonical = get_canonical(header)
-  url_alternate = get_alternate(header)  
-  
+  url_alternate = get_alternate(header)
+
   # only get main url without shortcuts of countries
   shop_url = get_mainpart_of_url(url_canonical)
   !shop_url.to_s
