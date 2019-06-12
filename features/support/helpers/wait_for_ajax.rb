@@ -10,7 +10,7 @@ module WaitForAjax
         sleep 0.1
       end
     end
-    raise 'wait_for_ajax timeout' unless finished
+    #raise 'wait_for_ajax timeout' unless finished
   end
 
 
