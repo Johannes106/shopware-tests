@@ -56,7 +56,8 @@ When("I save the form") do
   newsletter_box_registration = Newsletter_box_registration
   # push the button
   element = newsletter_box_registration.find(newsletter_form_send_button_path)
-  element.click
+  #element.click
+  click_secure(element)
 end
 
 Then("I should see a box of acception") do
@@ -96,7 +97,9 @@ When("I set the option to get a newsletter") do
   account_accountinfo_newsletter__acception_checkbox_path = '#newsletter'
 
   newsletter_box_account = page.find(account_accountinfo_newsletter_box_path)
-  newsletter_box_account.find(account_accountinfo_newsletter__acception_checkbox_path).click
+  #newsletter_box_account.find(account_accountinfo_newsletter__acception_checkbox_path).click
+  element = newsletter_box_account.find(account_accountinfo_newsletter__acception_checkbox_path)
+  click_secure(element)
 end
 
 Then("I should see a hint for changing settings") do
