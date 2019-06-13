@@ -71,20 +71,20 @@ Feature: account
 		When I login with valid informations
 		Then I should be on my account page
 
-  @account
-  @export
-  @chefworks
-  @pulsiva
-  @vega
-  @hotelwaesche
-  @hw_jobeline
-  @v_jobeline
-  @account_update
-  @account_payment_info
-	Scenario: list all options to pay
-		Given I am logged in
-		When I am looking for all different paymentmethods on the account
-		Then I should see all possibilities of payoptions
+ # @account
+ # @export
+ # @chefworks
+ # @pulsiva
+ # @vega
+ # @hotelwaesche
+ # @hw_jobeline
+ # @v_jobeline
+ # @account_update
+ # @account_payment_info
+	#Scenario: list all options to pay
+	#	Given I am logged in
+	#	When I am looking for all different paymentmethods on the account
+	#	Then I should see all possibilities of payoptions*/
 
   @account
   @export
