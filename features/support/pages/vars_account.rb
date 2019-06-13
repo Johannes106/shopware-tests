@@ -10,7 +10,9 @@ class Csspathes_Account
                 :account_userinfo_passwordchange_repeatnewpassword_path, :account_userinfo_passwordchange_button_path, :account_userinfo_emailchange_button_appear_path, :account_userinfo_emailchange_currentpassword_path,
                 :account_userinfo_emailchange_newmail_path, :account_userinfo_emailchange_repeatnewmail_path, :account_userinfo_emailchange_button_path, :account_userinfo_success_hint_path, :account_accountinfo_menucontainer_logout_link_path,
                 :account_accountinfo_payment_box_path, :account_accountinfo_paymentchange_button_appear_path, :account_payment_paymentoptions_path, :account_payment_cashOnDelivery_path, :account_payment_change_button_path,
-                :account_accountinfo_billaddress_box_path, :account_accountinfo_billaddresschange_button_appear_path, :account_invoiceadresschange_form_prefix_path, :account_invoiceadresschange_button_path, :account_accountinfo_deliveraddress_box_path, :account_userinfo_modal_adressmanager_path,
+                :account_accountinfo_billaddress_box_path, :account_accountinfo_billaddresschange_button_appear_path,
+                :account_invoiceadresschange_form_prefix_path, :account_invoiceadresschange_phone_path, :account_invoiceadresschange_streetnumber_path, :account_invoiceadresschange_company_path, :account_invoiceadresschange_button_path,
+                :account_accountinfo_deliveraddress_box_path, :account_userinfo_modal_adressmanager_path,
                 :account_accountinfo_deliveraddresschange_button_appear_path, :account_deliveradresschange_form_prefix_path, :account_deliveradresschange_button_path, :account_newsletter_box_path, :account_sidebar_path, :account_registerform_customernumber_path,
                 :account_address_create_path,  :account_address_prefix_path, :account_address_firstname_path, :account_address_lastname_path, :account_address_phone_path, :account_address_company_path, :account_address_street_path, :account_address_streetnumber_path, :account_address_countryarea_path,
                 :account_address_postcode_path, :account_address_city_path, :account_address_standard_path, :account_address_country_path, :account_address_savebutton_path, :account_accountinfo_payment_options_path
@@ -90,7 +92,9 @@ class Csspathes_Account
     @account_accountinfo_deliveraddresschange_button_appear_path = '.account--shipping.account--box.panel > div > a'
     @account_userinfo_modal_adressmanager_path = ".address-manager--modal"
     @account_deliveradresschange_form_prefix_path = '.address-form--panel > div > div.address--salutation.field--select > div'
-    @account_deliveradresschange_button_path = '.address--form-actions > input'
+    @account_invoiceadresschange_phone_path = '#phone'
+    @account_invoiceadresschange_streetnumber_path = '#emgroup_house_number'
+    @account_invoiceadresschange_company_path = '#register_billing_company'
     @account_newsletter_box_path = '#newsletter'
     @account_sidebar_path = '.account--menu > div > ul'
     @account_accountinfo_payment_options_path = '.payment--selection-label'
@@ -112,7 +116,10 @@ class Csspathes_Account
     @account_payment_cashOnDelivery_path = '#payment_mean5' if "#{@env_shop}".match(/v_jobeline/) && "#{@env_country}".match(/(de)/)
     @account_payment_cashOnDelivery_path = '#payment_mean4' if "#{@env_shop}".match(/v_jobeline/) && "#{@env_country}".match(/(fr|be|no|se)/)
     @account_accountinfo_billaddresschange_button_appear_path = 'a:nth-child(2)' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
-    @account_invoiceadresschange_form_prefix_path = '.panel.register--personal > div > div.register--salutation.field--select' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
+    @account_invoiceadresschange_form_prefix_path = '#salutation' if "#{@env_shop}".match(/hotelwaesche/) && "#{@env_country}".match(/[a-z]{2}/)
+    @account_invoiceadresschange_form_prefix_path = '#salutation' if "#{@env_shop}".match(/hw_jobeline/) && "#{@env_country}".match(/[a-z]{2}/)
+    @account_invoiceadresschange_form_prefix_path = '#salutation' if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/[a-z]{2}/)
+    #@account_address_phone_path = '#phone' if "#{@env_shop}".match(/hotelwaesche/) && "#{@env_country}".match(/[a-z]{2}/)
     @account_invoiceadresschange_button_path = '.account--actions > input' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @account_accountinfo_deliveraddresschange_button_appear_path = 'a:nth-child(2)' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @account_deliveradresschange_form_prefix_path = '.panel.register--shipping > div > div.register--salutation.field--select' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)

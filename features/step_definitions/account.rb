@@ -198,7 +198,9 @@ When(/^I create a new account with my data$/) do
   form_set_dropdown("country_area", country_area, account_registerform_countryarea_path)
 
   #click button
-  find_secure(account_registerform_button_path).click
+  #find_secure(account_registerform_button_path).click
+  element = find_secure(account_registerform_button_path)
+  click_secure(element)
   puts "clicked button to continue"
 
   #check for success
@@ -501,7 +503,8 @@ When(/^I modify my address for my bill$/) do
   end
 
   close_popup("#close-dpe-shopwide", 3)
-  element.click
+  # element.click
+  click_secure(element)
 
   puts "I change prefix of my address for invoice"
   step("I change prefix of my address for invoice")
@@ -509,9 +512,19 @@ end
 
 When(/^I change prefix of my address for invoice$/) do
   prefix = account[:data].prefix_sec
+  phone = account[:data].telephone
+  streetnumber = account[:data].streetnumber
+  company = account[:data].company
 
+  account_address_create_path = account[:pathes].account_address_create_path
   account_invoiceadresschange_form_prefix_path = account[:pathes].account_invoiceadresschange_form_prefix_path
+  account_invoiceadresschange_phone_path = account[:pathes].account_invoiceadresschange_phone_path
+  account_invoiceadresschange_streetnumber_path = account[:pathes].account_invoiceadresschange_streetnumber_path
   account_invoiceadresschange_button_path = account[:pathes].account_invoiceadresschange_button_path
+  account_invoiceadresschange_company_path = account[:pathes].account_invoiceadresschange_company_path
+
+  puts "> found formular to add a new address"
+  account_addressform = find_secure(account_address_create_path)
 
   if (VARS_ENV.r_country == 'no') || (VARS_ENV.r_country == 'se')
     puts "in #{VARS_ENV.r_country} there is no prefix"
@@ -519,11 +532,20 @@ When(/^I change prefix of my address for invoice$/) do
     #set value for prefix
     find_secure(account_invoiceadresschange_form_prefix_path)
     form_set_dropdown("prefix", prefix, account_invoiceadresschange_form_prefix_path)
-    puts "has set dropdown"
+    #set required value for phone
+    find_secure(account_invoiceadresschange_phone_path)
+    form_set_value(account_addressform, "phone", phone, account_invoiceadresschange_phone_path)
+    #set required value for streetnumber
+    find_secure(account_invoiceadresschange_streetnumber_path)
+    form_set_value(account_addressform, "streetnumber", streetnumber, account_invoiceadresschange_streetnumber_path)
+    #set required value for company
+    find_secure(account_invoiceadresschange_company_path)
+    form_set_value(account_addressform, "company", company, account_invoiceadresschange_company_path)
+
     element = find_secure(account_invoiceadresschange_button_path)#.click
     puts "found secure"
     click_secure(element)
-    puts "--> click change-button"
+    puts "--> clicked change-button"
   end
 end
 
@@ -604,7 +626,8 @@ When(/^I modify my address for my delivery/) do
     find_secure_counter <= 2 ? retry : raise
   end
 
-  element.click
+  # element.click
+  click_secure(element)
   puts "--> clicked button for change the adress for delivery"
   #puts "I change prefix of my address for delivery"
   #step("I change prefix of my address for delivery")
@@ -632,7 +655,9 @@ When(/^I activate the newsletterbox$/) do
   #if (VARS_ENV.r_shop == 'chefworks')
     account_newsletter_box_path = account[:pathes].account_newsletter_box_path
     find_secure(account_newsletter_box_path)
-    find_secure(account_newsletter_box_path).click
+    # find_secure(account_newsletter_box_path).click
+    element = find_secure(account_newsletter_box_path)
+    click_secure(element)
     puts "--> activate the checkbox"
   #else
     puts "On the shop of #{VARS_ENV.r_shop} this feature does not exist"

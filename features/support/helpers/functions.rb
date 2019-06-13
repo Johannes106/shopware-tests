@@ -336,7 +336,11 @@ module MyFunctions
     # else
     #   puts "In #{VARS_ENV.r_country} is no popup"
     # end
-    wait_for_ajax
+    begin
+      wait_for_ajax
+    rescue
+      refreshPage
+    end
     if args.size == 1
       #puts "find_secure_with_one_arg:#{args}"
       element = find_secure_with_one_arg(*args)
@@ -371,6 +375,7 @@ module MyFunctions
       elsif(page.has_css?('.entry--menu'))
         path = '.entry--menu'
       end
+      refreshPage
       # search for similar path and rerun with new path given of function
       find_secure_counter < 2 ? retry : raise
     rescue Net::ReadTimeout => e
@@ -379,7 +384,7 @@ module MyFunctions
       sleep 1
       puts "find_secure_with_one_arg"
       #Capybara.default_max_wait_time = 20
-      reload_page(url)
+      refreshPage
       find_secure_counter <= 2 ? retry : raise
     rescue Selenium::WebDriver::Error::UnhandledAlertError
       puts "\033[35m#{e.inspect}\033[0m\n"
@@ -391,6 +396,7 @@ module MyFunctions
       puts "#{e}"
       puts "\033[35m#{e.inspect}\033[0m\n"
       puts "\033[35m#{e.message}\033[0m\n"
+      refreshPage
       raise "UNKNOWN ERROR in find_secure_with_one_arg"
     end
     return found
@@ -539,11 +545,15 @@ module MyFunctions
       puts "close banner of summer-sale"
       close_popup("#close-dpe-shopwide", 3)
       click_secure_counter <= 2 ? retry : raise
+    rescue Selenium::WebDriver::Error::WebDriverError => e
+      puts "close banner"
+      close_popup("#close-dpe-shopwide", 3)
+      click_secure_counter <= 2 ? retry : raise
     rescue Exception => e
       puts "click_secure"
       puts "\033[35m#{e.inspect}\033[0m\n"
     end
-
+    url = current_url
     get_status_of_website(url)
   end
 
