@@ -60,7 +60,7 @@ if ENV['DRIVER'] == 'saucelabs'
           :name => "iPad Simulator"
         }
     end
-    @caps[:name] = "Shopware tests: #{ENV['BROWSER']} #{ENV['SYSTEM']} #{ENV['SHOP']} #{ENV['COUNTRY']} #{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']}"
+    @caps[:name] = "Shopware tests: #{ENV['BROWSER']} #{ENV['SYSTEM']} #{ENV['SHOP']} #{ENV['COUNTRY']} #{ENV['TAG']} #{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']} "
     @caps[:build] = "#{ENV['JOB_NAME']}__#{ENV['BUILD_NUMBER']}"
     @caps[:autoAcceptAlerts]   = true
     @caps[:capturePerformance] = true
