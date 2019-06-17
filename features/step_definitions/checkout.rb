@@ -177,7 +177,8 @@ When(/^I send my order$/) do
   step("I activate the box of agb")
 
   element = find_secure(checkout_orderbutton_path)
-  if (ENV['MAKE_ORDER'])
+  #if (ENV['MAKE_ORDER'])
+  if (ENV['SYSTEM'] == "int" || ENV['SYSTEM'] == "stage")
     @made_order=true
     element.click
     puts "--> click orderbutton"
@@ -393,22 +394,113 @@ When(/^I click the button to go to the final page on mobile$/) do
 end
 
 When(/^I am looking for all different paymentmethods$/) do
+  payment_methods = account[:data].payment_methods
+  look_for_payment
+  payment_methods.each do
+    select_payment
+    click_continue
+    check_chosen_payment
+    send_my_order
+    check_refered_order_page
+    go_to_paymentpage
+  end
+end
+
+def look_for_payment
   account_accountinfo_payment_options_path = checkout[:pathes].account_accountinfo_payment_options_path
-  account_accountinfo_payment_radio_path = checkout[:pathes].account_accountinfo_payment_radio_path
-  account_accountinfo_payment_label_path = checkout[:pathes].account_accountinfo_payment_label_path
-  # for a clean array
-  VARS_ENV.paymentmethods = []
+  account_accountinfo_payment_radio_path   = checkout[:pathes].account_accountinfo_payment_radio_path
+  account_accountinfo_payment_label_path   = checkout[:pathes].account_accountinfo_payment_label_path
+  checkout_payment_continue_path           = checkout[:pathes].checkout_payment_continue_path
   payment_options = page.all(account_accountinfo_payment_options_path, visible: true)
+  # loop over all determined payment_options
   payment_options.each do |payment|
-    payment.find(account_accountinfo_payment_radio_path)
     element = payment.find(account_accountinfo_payment_label_path)
+    # get name of payment
     element_txt = element.text
-    puts "> Payment: #{element_txt}"
+    # save each label into global array
     VARS_ENV.paymentmethods << element_txt
   end
   expect(VARS_ENV.paymentmethods.count).to eq(payment_options.count),
         "Expect to find the equal amount of paymentmethods as defined (in user.rb) but it isn't so"
   puts "> all paymentmethods are visible"
+end
+
+def select_payment
+  paymentmethods = VARS_ENV.paymentmethods
+  checkout_payment_method_path = '.payment--method-list .payment--method .method--name'
+  checkout_payment_form_path = checkout[:pathes].checkout_payment_form_path
+  checkout_payment_options_path = checkout[:pathes].checkout_payment_options_path
+  checkout_paymentInAdvance_radio_path = checkout[:pathes].checkout_paymentInAdvance_radio_path
+
+  find_secure(checkout_payment_form_path)
+  #set payment
+  payment_form = page.find(checkout_payment_form_path)
+  if (paymentmethods.any?)
+    # check if paymentmethods has a value
+    puts "> there are #{paymentmethods.size} paymentmethods left"
+    paymentmethod = paymentmethods[0]
+    element = payment_form.find(checkout_payment_method_path, :text => paymentmethod)
+    element.click
+    puts "--> select #{paymentmethod}"
+  end
+  #in cause of the loading-action (ajax)
+  wait_for_ajax
+end
+
+def click_continue
+  wait_for_ajax
+  checkout_payment_confirm_button_path = ".confirm--actions > button"
+  element = find_secure(checkout_payment_confirm_button_path, match: :first)
+  click_secure(element)
+  puts "> clicked button to confirm"
+end
+
+def check_chosen_payment
+  puts "> chosen payment should be #{VARS_ENV.paymentmethods[0]}"
+  checkout_payment_label_path = '.payment--description'
+
+  element = find_secure(checkout_payment_label_path)
+  element_text = element.text
+
+  expect(element_text).to include(VARS_ENV.paymentmethods[0]),
+      "expected to see #{VARS_ENV.paymentmethods[0]} as chosen paymentmethod but just #{element_text} appears"
+end
+
+def send_my_order
+  checkout_orderbutton_path = checkout[:pathes].checkout_orderbutton_path
+
+  element = find_secure(checkout_orderbutton_path)
+  #if (ENV['MAKE_ORDER'])
+  if (ENV['SYSTEM'] == "int" || ENV['SYSTEM'] == "stage")
+    @made_order=true
+    element.click
+    puts "--> click orderbutton"
+  else
+    puts "> found orderbutton but not press"
+  end
+end
+
+def check_refered_order_page
+  sleep 5
+  paymentmethod = VARS_ENV.paymentmethods[0]
+  puts "chosen paymentmethod: #{paymentmethod}"
+  url = current_url
+  if (@made_order)
+    puts "An order was made with #{paymentmethod}"
+    check_paymentmethod_by_refer(url, paymentmethod)
+    puts "-------++++++++++++------------++++++++"
+    puts '--> I add an article to my cart by ajax'
+    step('I add an article to my cart by ajax')
+  else
+    puts "No order was made"
+  end
+  VARS_ENV.paymentmethods.shift
+end
+
+def go_to_paymentpage
+  url = "#{settings.urlHttps}checkout/shippingPayment"
+  puts "go_to_paymentpage".upcase
+  visit_secure(url)
 end
 
 When(/^I set payment$/) do
@@ -429,11 +521,11 @@ When(/^I set payment$/) do
   end
   sleep 2
   expect(page).not_to have_selector(".js--loading-indicator", visible: true)
-  #expect(find_secure(:css, checkout_paymentInAdvance_radio_path)).to be_checked
   puts "> payment is chosen"
 end
 
 When(/^I set shipping$/) do
+  wait_for_ajax
   checkout_delivery_options_path = checkout[:pathes].checkout_delivery_options_path
   checkout_payment_delivery_standard_radio_path = checkout[:pathes].checkout_payment_delivery_standard_radio_path
   #checkout_payment_form_path = checkout[:pathes].checkout_payment_form_path
