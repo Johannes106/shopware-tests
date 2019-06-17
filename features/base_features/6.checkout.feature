@@ -63,7 +63,7 @@ Feature: checkout
 	  When I add an article to my cart by ajax
 	  Then the product cart contains an article
 	  And I am on the checkout page
-		When I am looking for all different paymentmethods
+		#When I am looking for all different paymentmethods
 		When I set payment
 		And I set shipping
 		When I click the button to continue on the checkoutpage
