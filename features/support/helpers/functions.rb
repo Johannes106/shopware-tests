@@ -678,7 +678,38 @@ module MyFunctions
       puts "url:#{url}"
       abort("WRONG URL:##{url}")
     end
-
-
   end
+
+  def check_paymentmethod_by_refer(url, paymentmethod)
+    case (paymentmethod.downcase)
+    when /.*ideal.*/
+      if(url.include?('saferpay.com/VT2/mpp/Ideal/Index'))
+        puts "> referred to saferpay"
+      else
+        abort ">>> instead of 'saferpay.com/VT2/mpp/PaymentSelection/Index' i get the url: #{url}".upcase
+      end
+    when /.*(k|c)redit.*/
+      if(url.include?('saferpay.com/VT2/mpp/PaymentSelection/Index'))
+        puts "> referred to saferpay"
+      else
+        abort ">>> instead of 'saferpay.com/VT2/mpp/PaymentSelection/Index' i get the url: #{url}".upcase
+      end
+    when /paypal/
+      if(url.include?('paypal.com/cgi-bin/webscr?cmd=_express-checkout&token'))
+        puts "> referred to paypal"
+      else
+        abort ">>> instead of 'paypal.com/cgi-bin/webscr?cmd=_express-checkout&token' i get the url: #{url}"
+      end
+    else
+      puts "The signal for a successful order of the chosen payment is probably 'vorkasse', 'nachnahme', 'rechnung'"
+      if(url.include?('checkout/finish'))
+        puts "> referred to the successpage"
+      else
+        puts ">>> instead of 'checkout/finish' i get the url: #{url}"
+        abort ">>> process of ordering was failed"
+      end
+      puts "The url is: #{url}"
+    end
+  end
+
 end
