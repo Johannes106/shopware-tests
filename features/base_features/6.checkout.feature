@@ -19,9 +19,9 @@ Feature: checkout
 	  And the product cart contains an article
 	  When I go to the checkout
 	  And I register a new account with my data
+		When I am looking for all different paymentmethods
 		When I set payment
 		And I set shipping
-		When I am looking for all different paymentmethods
 		When I click the button to continue on the checkoutpage
 	  When I send my order
 	  Then Shopware should have my order
@@ -63,9 +63,9 @@ Feature: checkout
 	  When I add an article to my cart by ajax
 	  Then the product cart contains an article
 	  And I am on the checkout page
+		When I am looking for all different paymentmethods
 		When I set payment
 		And I set shipping
-		When I am looking for all different paymentmethods
 		When I click the button to continue on the checkoutpage
 	  When I send my order
 	  Then Shopware should have my order
