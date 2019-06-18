@@ -54,7 +54,7 @@ class Csspathes_Checkout
     @checkout_checkout_buy_button_path = '.btn--checkout-proceed'
     @account_accountinfo_payment_options_path = '.payment--method'
     @account_accountinfo_payment_radio_path = '.radio'
-    @account_accountinfo_payment_label_path ='.method--label'
+    @account_accountinfo_payment_label_path ='.payment--method .method--label'
     update_pathes
   end
 
