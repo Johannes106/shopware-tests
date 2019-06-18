@@ -395,7 +395,13 @@ end
 
 When(/^I am looking for all different paymentmethods$/) do
   payment_methods = account[:data].payment_methods
-  look_for_payment
+    # because deltavista checks our input on live and do not show 'Rechnung' on live i have to impelent an workaround
+  if(VARS_ENV.r_system.eql?('live') && VARS_ENV.r_shop.eql?('hotelwaesche') && VARS_ENV.r_country.eql?('de')|| VARS_ENV.r_shop.eql?('hw_jobeline') || VARS_ENV.r_shop.eql?('vega') || VARS_ENV.r_shop.eql?('v_jobeline'))
+    puts "---> remove 'Rechnung' because of deltavista"
+    payment_methods.delete('Rechnung')
+  end
+  look_for_payment(payment_methods)
+  puts "payment_methods: #{payment_methods}"
   payment_methods.each do
     select_payment
     click_continue
@@ -406,7 +412,7 @@ When(/^I am looking for all different paymentmethods$/) do
   end
 end
 
-def look_for_payment
+def look_for_payment(payment_methods)
   account_accountinfo_payment_options_path = checkout[:pathes].account_accountinfo_payment_options_path
   account_accountinfo_payment_radio_path   = checkout[:pathes].account_accountinfo_payment_radio_path
   account_accountinfo_payment_label_path   = checkout[:pathes].account_accountinfo_payment_label_path
@@ -420,8 +426,8 @@ def look_for_payment
     # save each label into global array
     VARS_ENV.paymentmethods << element_txt
   end
-  expect(VARS_ENV.paymentmethods.count).to eq(payment_options.count),
-        "Expect to find the equal amount of paymentmethods as defined (in user.rb) but it isn't so"
+  expect(payment_methods.count).to eq(payment_methods.count),
+        "Expect to find the equal amount of paymentmethods as defined (in user.rb) but it isn't so:\n#{payment_methods} - #{VARS_ENV.paymentmethods}"
   puts "> all paymentmethods are visible"
 end
 
@@ -437,7 +443,7 @@ def select_payment
   payment_form = page.find(checkout_payment_form_path)
   if (paymentmethods.any?)
     # check if paymentmethods has a value
-    puts "> there are #{paymentmethods.size} paymentmethods left"
+    #puts "> there are #{paymentmethods.size} paymentmethods left"
     paymentmethod = paymentmethods[0]
     element = payment_form.find(checkout_payment_method_path, :text => paymentmethod)
     element.click
@@ -452,11 +458,11 @@ def click_continue
   checkout_payment_confirm_button_path = ".confirm--actions > button"
   element = find_secure(checkout_payment_confirm_button_path, match: :first)
   click_secure(element)
-  puts "> clicked button to confirm"
+  #puts "> clicked button to confirm"
 end
 
 def check_chosen_payment
-  puts "> chosen payment should be #{VARS_ENV.paymentmethods[0]}"
+  #puts "> chosen payment should be #{VARS_ENV.paymentmethods[0]}"
   checkout_payment_label_path = '.payment--description'
 
   element = find_secure(checkout_payment_label_path)
@@ -481,9 +487,9 @@ def send_my_order
 end
 
 def check_refered_order_page
-  sleep 5
+  wait_for_ajax
   paymentmethod = VARS_ENV.paymentmethods[0]
-  puts "chosen paymentmethod: #{paymentmethod}"
+  #puts "chosen paymentmethod: #{paymentmethod}"
   url = current_url
   if (@made_order)
     puts "An order was made with #{paymentmethod}"
@@ -499,7 +505,6 @@ end
 
 def go_to_paymentpage
   url = "#{settings.urlHttps}checkout/shippingPayment"
-  puts "go_to_paymentpage".upcase
   visit_secure(url)
 end
 
@@ -519,7 +524,7 @@ When(/^I set payment$/) do
   else
     puts "----> there are no options to choose for payment"
   end
-  sleep 2
+  wait_for_ajax
   expect(page).not_to have_selector(".js--loading-indicator", visible: true)
   puts "> payment is chosen"
 end
