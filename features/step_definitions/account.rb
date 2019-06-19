@@ -476,7 +476,8 @@ When(/^I change option of payment$/) do
   element = find_secure(account_payment_cashOnDelivery_path, page.html)
   element.click
   puts "--> choose checkbox for cash on delivery"
-  find_secure(account_payment_change_button_path).click
+  element = find_secure(account_payment_change_button_path)
+  click_secure(element)
 end
 
 When(/^I modify my address for my bill$/) do
