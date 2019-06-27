@@ -69,7 +69,7 @@ class Article
       when (/it/) then 'FORCHETTA BISTECCA'
       when (/fr/) then 'Fourchette'
       when (/no/) then 'Grillgaffel'
-      when (/se/) then 'GRILLGAFFEL'
+      when (/se/) then 'Köttgaffel Assisi'
       when (/nl/) then 'STEAKVORK'
       when (/es/) then 'TENEDOR PARA CARNE'
     end
