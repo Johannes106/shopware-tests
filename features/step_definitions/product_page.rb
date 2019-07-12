@@ -53,7 +53,7 @@ Then(/^I should see this article in the product cart$/) do
   url_cart = url_website+url_productcart
   product_cart_productinfo_path = productpage[:pathes].product_cart_productinfo_path
 
-  vistit(url_cart)
+  visit(url_cart)
   find_secure(product_cart_productinfo_path)
   element = find_secure(product_cart_productinfo_path)
   productinfo_txt = element.text
