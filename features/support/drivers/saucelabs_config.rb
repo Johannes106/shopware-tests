@@ -16,7 +16,7 @@ if ENV['DRIVER'] == 'saucelabs'
       @caps = {
         :platform => "Windows 10",
         :browserName => "MicrosoftEdge",
-        :version => "latest-2",
+        :version => "latest",
         :screenResolution => "1920x1200"
         }
     elsif ENV['BROWSER'] == 'chrome'
