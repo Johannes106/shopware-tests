@@ -32,14 +32,24 @@ Feature: product_cart
       And I am on the product cart page
       When I click on the button to continue shopping
   	  Then I will see the back on the productsite
-	
-	@chefworks 
+
+	@chefworks
+
+	  @pulsiva
+	  @vega
+	  @hotelwaesche
+	  @hw_jobeline
+	  @v_jobeline
 	@product_cart_add
     Scenario: add article additionally
-      Given I have added a product to the cart
-      When I enter a sku into the integrated field on the cart
-  	  Then I will see the add-action in the url
-	 
+      Given I am on the product page of an article
+			When I add an article to the product cart by clicking the button to push it into the cart
+			Then I should see this article in the product cart
+			Given I am on the website
+			When I am looking for another article on the website
+			And I add an article to the product cart by clicking the button to push it into the cart
+      Then I should see an article in the product cart
+
   @chefworks
   @pulsiva
   @product_cart_voucher
@@ -48,9 +58,9 @@ Feature: product_cart
       When I activate the function for voucher
 	    And I enter some code into the optional field
   	  Then there should be the voucher-action in the url
-	
+
 	@chefworks
-	@pulsiva 
+	@pulsiva
 	@vega
 	@hotelwaesche
 	@hw_jobeline
@@ -60,10 +70,10 @@ Feature: product_cart
       Given I have added a product to the cart
       Then the product cart contains an article
 	    When I remove this article from the product cart
-  	  Then the cart should not contain this article 
+  	  Then the cart should not contain this article
 
 	@chefworks_mobile
-	@pulsiva_mobile 
+	@pulsiva_mobile
 	@vega_mobile
 	@hotelwaesche_mobile
 	@hw_jobeline_mobile
@@ -74,7 +84,7 @@ Feature: product_cart
       Given I have added a product to the cart
       Then the product cart contains an article
 	    When I remove this article from the product cart
-  	  Then the cart should not contain this article 
+  	  Then the cart should not contain this article
 
   @chefworks
   @pulsiva
@@ -113,7 +123,7 @@ Feature: product_cart
 	    And the product cart contains an article
 	    When I navigate to the checkout by clicking the button which navigates to the checkout
 	    Then I should be on the checkout-page
-	    
+
 	@chefworks_mobile
   @vega_mobile
   @hw_jobeline_mobile

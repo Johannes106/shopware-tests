@@ -66,6 +66,27 @@ Then(/^I should see this article in the product cart$/) do
 
 end
 
+Then(/^I should see an article in the product cart$/) do
+  #define sku for product
+  #define path for product
+  #visit url for cart
+  #find block of productinfo
+  #find text of sku in text of productinfo
+  #expect
+  url_website = settings.urlHttps
+  url_productcart = 'checkout/cart'
+  url_cart = url_website+url_productcart
+  product_cart_productinfo_path = productpage[:pathes].product_cart_productinfo_path
+
+  visit(url_cart)
+  find_secure(product_cart_productinfo_path, match: :first)
+
+  #check for success
+  expect(current_url).to eq(url_cart),
+     "Expect url of the cart (#{url_cart}) but it was still #{current_url}"
+
+end
+
 Then(/^I should see all necessary elememts for getting more informations about this article$/) do
   # define name
   name = productpage[:data].name

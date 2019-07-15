@@ -202,3 +202,10 @@ Then(/^I will see the add-action in the url$/) do
     puts "On the shop of #{ENV['SHOP']} this feaature does not exist"
   end
 end
+
+When("I am looking for another article on the website") do
+  product_of_product_slider_path = '.product-slider.product-slider--content > div > div > div > div > div'#.product-slider.product-slider--content > div > div > div > div > div
+
+  element = find_secure(product_of_product_slider_path, match: :first)
+  element.click
+end
