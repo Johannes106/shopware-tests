@@ -74,16 +74,16 @@ class Article
     end
     #no umlauts
     @name = case ENV['COUNTRY']
-      when (/de/) then 'HERRENKOcHHOSE NICK'
-      when (/at/) then 'HERRENKOcHHOSE NICK'
-      when (/ch/) then 'HERRENKOcHHOSE NICK'
-      when (/it/) then 'PANTALONI DA CUOCO NICK'
-      when (/fr/) then 'PANTALON HOMME NICK'
-      when (/no/) then 'KOKKEBUKSE NICK'
-      when (/se/) then 'KOCKBYXOR NICK'
-      when (/nl/) then 'HERENBROEK NICK'
-      when (/be/) then 'PANTALON HOMME NICK'
-      when (/es/) then 'PANTALóN DE COCINA NICK'
+      when (/de/) then 'NICK'
+      when (/at/) then 'NICK'
+      when (/ch/) then 'NICK'
+      when (/it/) then 'NICK'
+      when (/fr/) then 'NICK'
+      when (/no/) then 'NICK'
+      when (/se/) then 'NICK'
+      when (/nl/) then 'NICK'
+      when (/be/) then 'NICK'
+      when (/es/) then 'NICK'
       when (/en/) then 'Nick'
     end
     @url_add_comand = case ENV['COUNTRY']
