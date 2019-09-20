@@ -1,7 +1,7 @@
 #vega
 class Article
   attr_accessor :sub_category, :category, :category_language_changed, :productnumber, :sku, :amount, :name, :url_add_comand
-  
+
   def initialize
     @sub_category = case ENV['COUNTRY']
       when (/de/) then 'Einzelbesteck'
@@ -73,18 +73,18 @@ class Article
       when (/en/) then 2
     end
     #no umlauts
-    @name = case ENV['COUNTRY'] 
-      when (/de/) then 'Teller flach Base'
-      when (/at/) then 'Teller flach Base'
-      when (/ch/) then 'Teller flach Base'
-      when (/it/) then 'Piatto piano Base'
+    @name = case ENV['COUNTRY']
+      when (/de/) then 'Base'
+      when (/at/) then 'Base'
+      when (/ch/) then 'Base'
+      when (/it/) then 'Base'
       when (/fr/) then 'Assiette plate Reims'
-      when (/no/) then 'Mattallerken Base'
-      when (/se/) then 'Mattallrik Base'
-      when (/nl/) then 'PLAT bord Base'
+      when (/no/) then 'Base'
+      when (/se/) then 'Base'
+      when (/nl/) then 'Base'
       when (/be/) then 'Assiette plate Reims'
-      when (/es/) then 'Plato llano Base'
-      when (/en/) then 'Flat plates Base'
+      when (/es/) then 'Base'
+      when (/en/) then 'Base'
     end
     @url_add_comand = case ENV['COUNTRY']
       when (/de/) then 'direktbestellen'
