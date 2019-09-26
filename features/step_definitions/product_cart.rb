@@ -46,22 +46,22 @@ And(/^I add an article to my cart manually$/) do
 end
 
 And(/^I add an article to my cart by ajax$/) do
-  website_url = settings.urlHttps
-  sku = productcart[:data].sku
-  amount = productcart[:data].amount
-  #assembling url:
-  ajax_params_function = "checkout/ajaxAddArticleCart?callback=jQuery"
-  ajax_params_sku = "&sAdd=#{sku}"
-  ajax_params_amount = "&sQuantity=#{amount}"
-  ajax_url = "#{website_url}#{ajax_params_function}#{ajax_params_sku}#{ajax_params_amount}"
-  begin
-    visit_secure(ajax_url)
-  rescue Mechanize::ResponseCodeError => e
-    puts "> AJAX is not working -> #{e}"
-    puts ">> add an article manually"
-    step("I am on the product page of an article")
-    step("I add an article to the product cart by clicking the button to push it into the cart")
-  end
+  # website_url = settings.urlHttps
+  # sku = productcart[:data].sku
+  # amount = productcart[:data].amount
+  # #assembling url:
+  # ajax_params_function = "checkout/ajaxAddArticleCart?callback=jQuery"
+  # ajax_params_sku = "&sAdd=#{sku}"
+  # ajax_params_amount = "&sQuantity=#{amount}"
+  # ajax_url = "#{website_url}#{ajax_params_function}#{ajax_params_sku}#{ajax_params_amount}"
+  # begin
+  #   visit_secure(ajax_url)
+  # rescue Mechanize::ResponseCodeError => e
+  puts "> AJAX-command is not working anymore (since Shopware 5.5)"
+  puts ">> add an article manually"
+  step("I am on the product page of an article")
+  step("I add an article to the product cart by clicking the button to push it into the cart")
+  # end
 end
 
 When(/^I click on the button to continue shopping$/) do
@@ -204,7 +204,7 @@ Then(/^I will see the add-action in the url$/) do
 end
 
 When("I am looking for another article on the website") do
-  product_of_product_slider_path = '.product-slider.product-slider--content > div > div > div > div > div'#.product-slider.product-slider--content > div > div > div > div > div
+  product_of_product_slider_path = '.product-slider.product-slider--content > div > div > div > div > div > div'#.product-slider.product-slider--content > div > div > div > div > div
 
   element = find_secure(product_of_product_slider_path, match: :first)
   element.click
