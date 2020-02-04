@@ -19,7 +19,7 @@ class Csspathes_Account
 
 
   def initialize
-    @homepage_content_logo_path = '.logo-main'
+    @homepage_content_logo_path = '.logo--shop-main'
     @navigation_hover_breadcrumb_path = '.content--breadcrumb'
     @checkout_registerform_firstname_path = '#firstname'
     @account_registerform_path = '#registration'
@@ -108,6 +108,7 @@ class Csspathes_Account
     @env_shop ||= VARS_ENV.r_shop
 
     # define hash of countries
+    @homepage_content_logo_path = ".logo-main" if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/[a-z]{2}/)
     @account_registerform_taxid_path = '#register_billing_emgroup_commercial_register_nr' if "#{@env_shop}".match(/v_jobeline/) && "#{@env_country}".match(/(no|nl)/)
     @account_registerform_taxid_path = '#register_billing_emgroup_commercial_register_nr' if "#{@env_shop}".match(/vega/) && "#{@env_country}".match(/(no|nl|se)/)
     @account_registerform_taxid_path = '#register_billing_emgroup_commercial_register_nr' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)

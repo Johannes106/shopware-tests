@@ -10,7 +10,7 @@ class Csspathes_Checkout
                 :account_accountinfo_payment_label_path
 
   def initialize
-    @homepage_content_logo_path = '.logo-main'
+    # @homepage_content_logo_path = '.logo--shop-main'
     @navigation_hover_breadcrumb_path = '.content--breadcrumb'
     @account_registerform_vallidation_modal_path = '.replyGoogleMapsAddressValidation'
     @account_registerform_vallidation_ignore_path = '.modal-ignore'
@@ -63,6 +63,7 @@ class Csspathes_Checkout
     @env_country ||= VARS_ENV.r_country
     @env_system ||= VARS_ENV.r_system
     @env_shop ||= VARS_ENV.r_shop
+    # @homepage_content_logo_path = ".logo-main" if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/[a-z]{2}/)
     @checkout_agb_container_path = '.tos--panel' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @checkout_orderbutton_path = '.actions--bottom > div > button' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @checkout_panel_path = '.panel.has--border > div > .table--header' if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/it/)

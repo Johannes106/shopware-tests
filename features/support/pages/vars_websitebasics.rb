@@ -12,7 +12,7 @@ class Csspathes_Websitebasics
                 :links_cart_sidebar_path, :links_cart_button_path, :links_service_path, :links_context_path, :links_about_path, :links_imprint_path, :links_info_headline
 
   def initialize
-    @homepage_content_logo_path = '.logo-main'
+    @homepage_content_logo_path = '.logo--shop-main'
     @homepage_product_cart_hint_content_path = "div > div > div > div > .alert--content"
     @account_accountpage_welcome_path = '.account--welcome.panel'
     #website basics
@@ -58,6 +58,7 @@ class Csspathes_Websitebasics
     @env_system ||= VARS_ENV.r_system
     @env_shop ||= VARS_ENV.r_shop
     # define hash of countries
+    @homepage_content_logo_path = ".logo-main" if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/[a-z]{2}/)
     @homepage_content_header_path = 'body > div.page-wrap > header' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @homepage_content_navi_path = 'body > div.page-wrap > nav' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)
     @homepage_content_body_main_path = 'div.page-wrap > section > div' if "#{@env_shop}".match(/chefworks/) && "#{@env_country}".match(/[a-z]{2}/)

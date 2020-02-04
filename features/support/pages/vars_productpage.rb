@@ -3,7 +3,7 @@ class Csspathes_Productpage
   attr_accessor :homepage_content_logo_path,
                 :product_page_buybutton_path, :product_page_infobox_path, :product_cart_productinfo_path, :product_page_productname_path, :product_page_productpicture_path, :product_page_productconfig_path, :product_page_productinfo_path, :product_page_productrecommodations_path, :product_page_productlast_path, :product_page_rememberbutton_path, :product_page_heart_badge_path, :product_page_comparebutton_path, :product_page_compareicon_path, :product_page_rate_ratebutton_path, :product_page_rate_tab_menu, :product_page_rate_tab_rateflag, :product_page_viewed_tab_menu, :product_page_viewed_tab_otherCustomer, :product_page_rate_form, :product_page_suggest_container
   def initialize
-    @homepage_content_logo_path = '.logo-main'
+    @homepage_content_logo_path = '.logo--shop-main'
     @product_page_buybutton_path = '.MainProductButtons > div'#'form > div > button' #pdp:
     @product_page_infobox_path = '.is--active.is--open'
     @product_cart_productinfo_path = 'div.panel--td.table--content'
@@ -35,6 +35,7 @@ class Csspathes_Productpage
 
     #pdp
     #hotelwaesche + hw_jobeline
+    @homepage_content_logo_path = ".logo-main" if "#{@env_shop}".match(/pulsiva/) && "#{@env_country}".match(/[a-z]{2}/)
     @product_page_buybutton_path = '.MainProductButtons > div' if "#{@env_shop}".match(/hotelwaesche/) && "#{@env_country}".match(/[a-z]{2}/) || ("#{@env_shop}".match(/hw_jobeline/) && "#{@env_country}".match(/[a-z]{2}/))
     @product_page_productname_path = '.MainProductName' if ("#{@env_shop}".match(/hotelwaesche/) && "#{@env_country}".match(/[a-z]{2}/)) || ("#{@env_shop}".match(/hw_jobeline/) && "#{@env_country}".match(/[a-z]{2}/))
     @product_page_productpicture_path = '.image-gallery' if "#{@env_shop}".match(/hotelwaesche/) && "#{@env_country}".match(/[a-z]{2}/) || ("#{@env_shop}".match(/hw_jobeline/) && "#{@env_country}".match(/[a-z]{2}/))
