@@ -41,9 +41,9 @@ class Article
     end
     #no umlauts
     @name = case ENV['COUNTRY']
-      when (/de/) then 'Stewardmütze Willy'
-      when (/at/) then 'Stewardmütze Willy'
-      when (/ch/) then 'Stewardmütze Willy'
+      when (/de/) then 'Willy'
+      when (/at/) then 'Willy'
+      when (/ch/) then 'Willy'
     end
     @url_add_comand = case ENV['COUNTRY']
       when (/de/) then 'EMGroupDirectOrder'
