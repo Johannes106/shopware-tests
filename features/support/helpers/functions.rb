@@ -503,6 +503,9 @@ module MyFunctions
       visit_secure_counter += 1
       visit(url)
       puts "go to #{url}"
+      if ( (ENV['SHOP']=='pulsiva') || (ENV['SHOP']=='v_jobeline') || (ENV['SHOP']=='hotelwaesche') || (ENV['SHOP']=='vega') && (ENV['COUNTRY']=='de') || (ENV['COUNTRY']=='at') || (ENV['COUNTRY']=='ch') )
+        close_popup(".modal--close", 5)
+      end
       if ( ENV['SHOP']=='vega' && (ENV['COUNTRY']=='de') || (ENV['COUNTRY']=='it') )
         block_css('.dpe-shopwide')
       end
