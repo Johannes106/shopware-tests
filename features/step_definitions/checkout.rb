@@ -378,7 +378,7 @@ When(/^I set payment and shipping$/) do
 end
 
 When(/^I click the button to continue on the checkoutpage$/) do
-  checkout_payment_confirm_button_path = ".confirm--actions > button"
+  checkout_payment_confirm_button_path = ".main--actions"
   find_secure(checkout_payment_confirm_button_path, match: :first).click
   puts "> clicked button to confirm"
 end
