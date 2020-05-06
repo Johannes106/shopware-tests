@@ -542,9 +542,13 @@ module MyFunctions
       puts "\033[35m#{e.inspect}\033[0m\n"
     rescue Capybara::ElementNotFound => e
       puts "\033[35m#{e.inspect}\033[0m\n"
+      close_popup(".dy-lb-close", 3)
       close_popup("#close-dpe-shopwide", 5)
       click_secure_counter <= 2 ? retry : raise
     rescue Selenium::WebDriver::Error::UnknownError => e
+      puts "\033[35m#{e.inspect}\033[0m\n"
+      puts "close banner of dynamicyield"
+      close_popup(".dy-lb-close", 3)
       puts "close banner of summer-sale"
       close_popup("#close-dpe-shopwide", 3)
       click_secure_counter <= 2 ? retry : raise
@@ -554,6 +558,7 @@ module MyFunctions
       click_secure_counter <= 2 ? retry : raise
     rescue Exception => e
       puts "click_secure"
+      # puts "\033[35m#{e.class}\033[0m\n"
       puts "\033[35m#{e.inspect}\033[0m\n"
     end
     url = current_url
