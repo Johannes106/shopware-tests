@@ -30,7 +30,7 @@ When(/^I add an article to the product cart by clicking the button to push it in
 
   find_secure(product_page_buybutton_path)
   element = find_secure(product_page_buybutton_path)
-  element.click
+  click_secure(element)
   puts "-> clicked buy button"
 end
 

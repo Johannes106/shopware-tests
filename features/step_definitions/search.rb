@@ -13,7 +13,7 @@ When(/^I am searching for a product by entering the sku in the searchfield$/) do
   element = find_secure(search_searchfield_path, page_content)
   element.set(sku)
   search_searchbutton = find_secure(search_searchbutton_path, page_content)
-  search_searchbutton.click()
+  click_secure(search_searchbutton)
   puts "clicked button of search"
 end
 
