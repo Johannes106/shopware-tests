@@ -538,6 +538,7 @@ module MyFunctions
     begin
       puts "close banner of cookies"
       close_popup(".accept-cookies-button", 2)
+      close_popup(".onetrust-accept-btn-handler", 2)
       click_secure_counter += 1
       element.click
     rescue Net::HTTP::Persistent::Error => e
@@ -555,6 +556,7 @@ module MyFunctions
       close_popup("#close-dpe-shopwide", 3)
       puts "close banner of cookies"
       close_popup(".accept-cookies-button", 3)
+      close_popup(".onetrust-accept-btn-handler", 3)
       click_secure_counter <= 2 ? retry : raise
     rescue Selenium::WebDriver::Error::WebDriverError => e
       puts "close banner"
