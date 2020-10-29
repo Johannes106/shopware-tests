@@ -1,8 +1,8 @@
 # shopware_tests
-##Automated Feature Testing
+## Automated Feature Testing
 This is functional testing for webshops of vega, jobeline, hotelwaesche, pulsiva, chefworks.
 
-###Following **test-cases/features** exists:
+### Following **test-cases/features** exists:
 - content
 - website basics
 - search
